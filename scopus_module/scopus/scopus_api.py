@@ -156,11 +156,15 @@ class ScopusAbstract(object):
 
         coredata = results.find('dtd:coredata', ns)
         authors = results.find('dtd:authors', ns)
-        paper_references = []
-        references = results.find('item').find('bibrecord').find('tail').find('bibliography').findall('reference')
-        for ref in references:
-          paper_references.append(ref.find('ref-info').find('refd-itemidlist').find('itemid').text)
-        self._references = paper_references
+        try:
+          paper_references = []
+          references = results.find('item').find('bibrecord').find('tail').find('bibliography').findall('reference')
+          for ref in references:
+            paper_references.append(ref.find('ref-info').find('refd-itemidlist').find('itemid').text)
+          self._references = paper_references
+        except AttributeError:
+          self._references = None
+          pass
         self.results = results
         if results.tag == 'service-error':
             raise Exception('\n{0}\n{1}'.format(EID, self.xml))
