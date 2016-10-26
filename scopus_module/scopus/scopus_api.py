@@ -23,9 +23,15 @@ class ScopusAbstract(object):
     """
 
     @property
+    def subject_areas(self):
+        """Subject areas that a paper belongs to"""
+        return self._subject_areas
+
+    @property
     def references(self):
         """Scopus id's of papers referenced"""
         return self._references
+
     @property
     def url(self):
         """URL to the abstract."""
@@ -162,8 +168,15 @@ class ScopusAbstract(object):
           for ref in references:
             paper_references.append(ref.find('ref-info').find('refd-itemidlist').find('itemid').text)
           self._references = paper_references
-        except AttributeError:
+          subject_areas_xml_list = results.find('dtd:subject-areas', ns).getchildren()
+          subject_areas = []
+          for sub in subject_areas_xml_list:
+              sub_dict = dict(sub.attrib.items() + {'text':sub.text}.items())
+              subject_areas.append(sub_dict)
+          self._subject_areas = subject_areas
+        except AttributeError,e:
           self._references = None
+          self._subject_areas = None
           pass
         self.results = results
         if results.tag == 'service-error':
@@ -172,9 +185,9 @@ class ScopusAbstract(object):
         self.coredata = coredata
         self.authors_xml = authors
         self._url = get_encoded_text(coredata, 'prism:url')
-
         self.identifier = get_encoded_text(coredata, 'dc:identifier')
         self.eid = get_encoded_text(coredata, 'dtd:eid')
+        self.scopus_id = self.eid
         self._doi = get_encoded_text(coredata, 'prism:doi')
         self._title = get_encoded_text(coredata, 'dc:title')
 
@@ -208,8 +221,10 @@ class ScopusAbstract(object):
         self.scopus_link = sl
         self.self_link = self_link
         self.cite_link = cite_link
-
-        self._authors = [ScopusAuthor(author) for author in authors]
+        if authors == None:
+          self._authors = None
+        else:
+          self._authors = [ScopusAuthor(author) for author in authors]
         self._affiliations = [ScopusAffiliation(aff) for aff
                               in results.findall('dtd:affiliation', ns)]
 

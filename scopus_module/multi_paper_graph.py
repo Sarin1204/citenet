@@ -1,7 +1,9 @@
 
 from py2neo import authenticate, Graph, Node, Relationship
 from scopus.scopus_api import ScopusAbstract
+from paper_abstract import *
 import pdb
+
 
 authenticate("localhost:7474", "neo4j", "3800")
 graph = Graph()
@@ -11,6 +13,9 @@ paper_ids = [x.strip('\n') for x in paper_ids]
 
 for paper_id in paper_ids:
   paper_abstract = ScopusAbstract("2-s2.0-"+paper_id)
+  pdb.set_trace()
+  mp = PaperAbstract(paper_id)
+  pdb.set_trace()
   node = Node("Paper", title =paper_abstract.title,eid=paper_abstract.eid)
   if paper_abstract.references != None:
     for ref_id in paper_abstract.references:
