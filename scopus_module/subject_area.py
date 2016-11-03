@@ -34,3 +34,10 @@ class subject_areas(object):
         prop_string+="}"
         return prop_string
 
+    def getRelatedPaper(self,graph):
+	retlist=[]
+	query="Match (s:subject_area{code:"'"'+self.code+'"'"})<-[a:associated_to]-(p:Paper) Return p.title as title"
+	result=graph.run(query)
+	for record in result:
+		retList.append(record)
+	return retList

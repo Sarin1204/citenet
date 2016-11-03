@@ -166,6 +166,14 @@ class PaperAbstract(object):
           query+=' MERGE(p)-[:'+rel_obj.relationship_type+']->(r) return p,r'
           graph.run(query)
 
+  def getCitedBy(self,graph):
+	retlist=[]
+	query="MATCH (n:Paper)-[c:CITES]->(e:Paper{scopus_id:"'"'+self.scopus_id+'"'"}) RETURN n.title as title"
+	result = graph.run(query)
+        for record in result:
+                retList.append(record)
+        return retList
+
   def bind_remote(self,graph):
     self.create_remote_node(graph)
     self.create_remote_relationships(graph)
