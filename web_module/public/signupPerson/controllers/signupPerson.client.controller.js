@@ -21,6 +21,7 @@ angular.module('signupPerson').controller('SignupPersonController',['$scope',
             console.log('person created is'+JSON.stringify(signup));
 
             signup.$save(function(response){
+                console.log("Inside signup save "+response);
                 /*$window.location.href='http://localhost:3000/api/checkchild';*/
                 $location.path('/dashboard')
             }, function(errorResponse){

@@ -13,7 +13,7 @@
     "passport": "latest",
     "passport-local": "latest",
     "connect-flash": "latest",
-    "bcrypt": "latest",
+    "bcryptjs": "latest",
     "node-uuid": "latest",
     "sequelize": "latest",
     "mysql": "latest"

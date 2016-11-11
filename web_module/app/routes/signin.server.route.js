@@ -16,7 +16,8 @@ module.exports = function(app) {
                 return next(err);
             }
             if (!user) {
-                return res.status(401).send({ error: 'Authentication returned error'+err });
+                console.log("error in signin server "+JSON.stringify(info));
+                return res.status(401).send({ error:info["message"] });
             }
             req.logIn(user, function (err) {
                 if (err) {

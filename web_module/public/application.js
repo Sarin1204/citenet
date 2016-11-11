@@ -3,7 +3,7 @@
  */
 var mainApplicationModuleName = 'citenet';
 var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap','ui.select','ngSanitize','frapontillo.bootstrap-switch',
-    'auth','home','getUser','signupPerson','signinPerson','dashboard','roles','shortest_path']);
+    'auth','home','getUser','signupPerson','signinPerson','dashboard','roles','roleStatus','shortest_path']);
 
 mainApplicationModule.config(['$locationProvider','$httpProvider',
     function($locationProvider,$httpProvider){

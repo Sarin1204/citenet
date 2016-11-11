@@ -84,7 +84,7 @@ exports.getShortestPath = function(req, res){
 
     //var qTest="MATCH p=shortestPath((a:Paper{scopus_id:'2-s2.0-0002871703'})-[c:CITES*]-(b:Paper{scopus_id:'2-s2.0-0011067403'})) UNWIND NODES(p) as PNODE RETURN PNODE,c"
     var qTest = "MATCH (s:subject_area{code:'2500'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..10]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{code:'2504'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
-    var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
+    var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }";
 
     req.write(queryTest);
     req.end();

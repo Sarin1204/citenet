@@ -29,6 +29,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     nodeCaption : function(node){
                         return node.scopus_id + ": " + node.title;
                     },
+                    linkDistancefn: function(){ return 400; },
                     directedEdges : true
                 };
                 //alchemy.begin({"dataSource": response[0]["graph"]})
