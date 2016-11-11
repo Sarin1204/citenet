@@ -1,0 +1,28 @@
+{
+  "name": "citenet",
+  "version": "0.0.1",
+  "description": "A research paper citation graph network",
+  "dependencies": {
+    "express": "latest",
+    "morgan": "latest",
+    "compression": "latest",
+    "body-parser": "latest",
+    "method-override": "latest",
+    "ejs": "latest",
+    "express-session": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "connect-flash": "latest",
+    "bcrypt": "latest",
+    "node-uuid": "latest",
+    "sequelize": "latest",
+    "mysql": "latest"
+  },
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,138 @@
+
+<!-- Top menu -->
+<link rel="stylesheet" href="assets/css/form-elements.css">
+<nav class="navbar navbar-css navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#"><img src="/img/citenet_asu_logo.png" style="height:70px"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+							<span class="li-text">
+								Connect with us
+							</span>
+							<span class="li-social">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-youtube"></i></a>
+							</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Sign in</h3>
+                            <p>Sign in to get started!</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-sign-in"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom col-md-12">
+                        <div>
+                            <div class="form-bottom" ng-controller="SigninPersonController" >
+                                <form role="form" data-ng-submit="signin_person()"  class="registration-form">
+                                    <div class="form-group" >
+                                        <label for="email">Email</label>
+                                        <div>
+                                            <input type="email" data-ng-model="email" id="email" class="form-control" placeholder="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div>
+                                            <input type="password" data-ng-model="password" id="password" class="form-control" placeholder="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div ng-show="showMessage" class="{{signin_error.type}} fadein fadeout">{{signin_error.msg}}</div>
+                                    </div>
+                                    <div class="form-group col-md-offset-5">
+                                        <button class="btn btn-lg" type="submit" >Sign me in</button>
+                                    </div>
+
+                                    <br>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Sign up now</h3>
+                            <p>Fill in the form below to get access</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom" ng-controller="SignupPersonController" style="max-height:465px; overflow:auto">
+
+                        <form role="form" data-ng-submit="create_person()" class="registration-form">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <div>
+                                    <input type="email" data-ng-model="email" id="email" class="form-control" placeholder="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div>
+                                    <input type="password" data-ng-model="password" id="password" class="form-control" placeholder="password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname">Firstname</label>
+                                <div>
+                                    <input type="text" data-ng-model="firstname" id="firstname" class="form-control" placeholder="firstname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Lastname</label>
+                                <div>
+                                    <input type="text" data-ng-model="lastname" id="lastname" class="form-control" placeholder="lastname" required>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-controller="RolesController">
+                                <label>Role</label>
+                                <ui-select ng-model="role_selected"  on-select="roleSelected($item)">
+                                    <ui-select-match>{{$select.selected.role_name || $select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="role in (roles | filter: $select.search) track by role.role_id">
+                                        <span ng-bind="role.role_name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-offset-5">
+                                <button type="submit" class="btn">Sign me up!</button>
+                            </div>
+                            <div data-ng-show="error">
+                                <strong data-ng-bind="error"></strong>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
