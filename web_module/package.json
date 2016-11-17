@@ -16,7 +16,9 @@
     "bcryptjs": "latest",
     "node-uuid": "latest",
     "sequelize": "latest",
-    "mysql": "latest"
+    "mysql": "latest",
+    "multer": "latest",
+    "python-shell": "latest"
   },
   "main": "server.js",
   "devDependencies": {},

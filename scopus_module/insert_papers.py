@@ -3,6 +3,7 @@ from scopus.scopus_api import ScopusAbstract
 from paper_abstract import *
 import pdb
 import argparse
+import json
 
 def init_arg_parser():
     parser = argparse.ArgumentParser()
@@ -27,7 +28,7 @@ def perform_dfs(curr_paper,count):
             dfs(ref_id,curr_paper.scopus_id,count+1)
 
 def dfs(curr_paper_id,parent_id,count):
-    if count > 3:
+    if count > 2:
       return
     curr_paper = PaperAbstract(curr_paper_id)
     if curr_paper.title != None:
@@ -37,15 +38,29 @@ def dfs(curr_paper_id,parent_id,count):
 
 
 (filename,server,port) = init_arg_parser()
-pdb.set_trace()
-
+filename=filename.replace("\n","")
 
 authenticate(server+":"+port, "neo4j", "3800")
 graph = Graph()
 with open(filename) as f:
     paper_ids = f.readlines()
 paper_ids = [x.strip('\n') for x in paper_ids]
+completed = 0
+data={}
+data['total']=len(paper_ids)
+data['completed']=completed
+output_file=filename.replace(".txt","")
+with open(output_file+'_output.txt','w+') as f:
+    f.write(json.dumps(data))
+try:
+    for paper_id in paper_ids:
+        dfs(paper_id,None,0)
+        completed+=1
+        data['completed']=completed
+        data['curr_paper']=paper_id
+        with open(output_file+"_output.txt",'w+') as f:
+            f.write(json.dumps(data))
+except Exception,e:
+    os.remove(output_file+'_output.txt')
 
-for paper_id in paper_ids:
-  dfs(paper_id,None,0)
 

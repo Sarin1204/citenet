@@ -49,6 +49,7 @@ module.exports = function () {
     require('../app/routes/dashboard.server.route')(app);
     require('../app/routes/roles.server.route.js')(app);
     require('../app/routes/shortest_path.server.route.js')(app);
+    require('../app/routes/upload_papers.server.route.js')(app);
 
     app.use(express.static('./public'));
 

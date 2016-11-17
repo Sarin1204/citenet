@@ -11,6 +11,8 @@
     "angular-sanitize" : "latest",
     "angular-ui-select" : "latest",
     "angular-bootstrap-switch" : "latest",
-    "alchemyjs" : "latest"
+    "alchemyjs" : "latest",
+    "ng-file-upload" : "latest",
+    "angular-bootstrap-file-field" : "latest"
   }
 }
