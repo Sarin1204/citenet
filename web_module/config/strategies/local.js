@@ -8,7 +8,7 @@
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     sequelize = require("../../config/sequelize").getSequelize,
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcryptjs');
 
 module.exports = function() {
     passport.use(new LocalStrategy({

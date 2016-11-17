@@ -2,7 +2,7 @@
  * Created by vipul on 4/23/2016.
  */
 var sequelize = require("../../config/sequelize").getSequelize,
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcryptjs');
 
 
 exports.signout = function(req, res) {

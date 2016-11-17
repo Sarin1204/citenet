@@ -4,10 +4,10 @@
 
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('citenet', 'citenet', 'password', {
+var sequelize = new Sequelize('citenet', 'root', 'admin', {
     host: 'localhost',
     dialect: "mysql", // or 'sqlite', 'postgres', 'mariadb'
-    port:    3306, // or 5432 (for postgres)
+    port:    3300, // or 5432 (for postgres)
     logging: console.log
 });
 sequelize

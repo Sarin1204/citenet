@@ -90,13 +90,13 @@
                     <div class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                Shortest Path description
+                               Incoming Relation Description
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="panel-card panel">
                                 <div class="panel-body">
-                                    The shortest path use case finds the shortest path between 2 research papers. This sho
+                                   This use case shows all the incoming relation for a particular entity
                                 </div>
                             </div>
                             <hr>
@@ -106,8 +106,8 @@
                                         Filter description
                                     </div>
                                 </div>
-                                <div class="panel-body">
-                                    <b>Source : Fields to input the source and target research papers.</b>
+                                <div class="panel-body" ng-controller="IncomingRelation" >
+                                    <label>{{ myFieldLabel }}</label>
                                 </div>
                             </div>
                             <hr>
@@ -118,9 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    This use case allows   an   author   to   see   how   their   paper   is
-                                    linked   to   another   paper   by   an   influential   author   whom   they   are   trying   to
-                                    collaborate with.
+                                    This use case allows the user to see all incoming relation for a particular entity
                                 </div>
                             </div>
                         </div>
@@ -130,22 +128,26 @@
                     <div class="row">
                         <div class="panel-card panel">
                             <div class="panel-body">
-                                <div class="container-fluid" ng-controller="ShortestPathController">
-                                    <form role="form" data-ng-submit="shortest_path_query()" class="registration-form">
+                                <div class="container-fluid" ng-controller="IncomingRelation">
+                                    <form role="form" data-ng-submit="incoming_relation_query()" class="registration-form">
+                                        <div>
+                                            <label>Please select the type of entity</label><br>
+                                            <input type="radio"  ng-model="entitytype" value="Paper" ng-change='newValue()'>
+                                            <label> Paper </label>
+                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="SubjectArea" ng-change='newValue()'>
+                                            <label> Subject Area </label>
+                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Author" ng-change='newValue()'>
+                                            <label>  Author    </label>
+                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Affiliation" ng-change='newValue()'>
+                                            <label> Affiliation </label>
+                                        </div>
+                                        <br>
                                         <div class="row">
                                             <div class="col-md-5 ">
                                                 <div class="form-group">
-                                                    <label for="paper1">Paper 1: </label>
+                                                    <label for="source">Entity 1: </label>
                                                     <div>
-                                                        <input type="paper1" data-ng-model="paper1" id="paper1" class="form-control" placeholder="paper 1" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="paper2">Paper 2: </label>
-                                                    <div>
-                                                        <input type="paper2" data-ng-model="paper2" id="paper2" class="form-control" placeholder="paper 2" required>
+                                                        <input type="source" data-ng-model="source" id="source" class="form-control" placeholder="Source" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,14 +155,6 @@
                                                 <button style="padding:10px 15px" class="btn btn-success btn-lg" type="submit">
                                                     <i class="fa fa-play"></i>
                                                 </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <input bs-switch ng-model="all_paths"  switch-change="onChange()" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="checkbox">
-                                            </div>
-                                            <div class="col-md-10">
-                                                <label> Show all paths between papers? (Max dist : 10) </label>
                                             </div>
                                         </div>
                                         <hr>

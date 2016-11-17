@@ -1,26 +1,28 @@
 /**
- * Created by vipul on 4/27/2016.
+ * Created by Dhruvraj on 4/27/2016.
  */
-angular.module('shortest_path').controller('ShortestPathController',['$scope',
-    '$routeParams', '$location','ShortestPath','getUser',
-    function($scope, $routeParams, $location, ShortestPath,getUser){
+angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope',
+    '$routeParams', '$location','SubjectAreaConn','getUser',
+    function($scope, $routeParams, $location, SubjectAreaConn,getUser){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = true;
-        $scope.shortest_path_query = function(){
-            console.log('Inside shortest_path_query');
+        $scope.entitytype='SubjectArea';
+        $scope.subject_area_connection_query = function(){
+            console.log('Inside subject_area_connection_query');
             var fields = {
-                'paper1' : $scope.paper1,
-                'paper2' : $scope.paper2,
+                'subjectArea1' : $scope.subjectArea1,
+                'subjectArea2' : $scope.subjectArea2,
+                'entitytype':    $scope.entitytype,
                 'all_paths' : $scope.all_paths,
                 'intermediate_nodes' : $scope.intermediate_nodes
             };
 
-            console.log("fileds are "+JSON.stringify(fields));
+            console.log("fields are "+JSON.stringify(fields));
 
-            ShortestPath.getShortestPath.query(fields, function(response){
-                console.log('Success in getShortestPath '+JSON.stringify(response));
-                $scope.shortest_path_json = response[0]["graph"];
+            SubjectAreaConn.getSubjAreaConn.query(fields, function(response){
+                console.log('Success in getSubjAreaCOnn '+JSON.stringify(response));
+                $scope.subject_area_connection_json = response[0]["graph"];
                 var myEl = angular.element("svg");
                 myEl.remove();
                 var config = {
@@ -29,8 +31,8 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     edgeCaption: 'caption',
                     nodeCaptionsOnByDefault: true,
                     edgeCaptionsOnByDefault: true,
-                    nodeTypes: {"type":["Paper","subject_area"]},
-                    edgeTypes: {"type":["CITES","associated_to"]},
+                    nodeTypes: {"type":["Paper","subject_area","author","affiliation"]},
+                    edgeTypes: {"type":["CITES","associated_to","affiliated_to","written_by"]},
                     directedEdges:true,
                     linkDistancefn: function(){ return 800; },
                     nodeStyle: {
@@ -60,7 +62,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                 //alchemy.begin({"dataSource": response[0]["graph"]})
                 alchemy = new Alchemy(config);
             },function(error){
-                console.log('Error in getShortestPath '+error);
+                console.log('Error in getSubjAreaConn '+error);
             });
 
         };

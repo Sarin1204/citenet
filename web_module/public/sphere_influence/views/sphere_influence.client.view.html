@@ -67,9 +67,9 @@
                             <div class="panel-card panel">
                                 <div class="panel-body" style="padding-left:10px">
                                     <a href="#!/sphere_influence">
-                                        <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
-                                            <i class="fa fa-globe fa-2x"></i>
-                                        </button>
+                                    <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
+                                        <i class="fa fa-globe fa-2x"></i>
+                                    </button>
                                     </a>
                                 </div>
                             </div>
@@ -90,13 +90,13 @@
                     <div class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                Shortest Path description
+                               Sphere Of Influence
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="panel-card panel">
                                 <div class="panel-body">
-                                    The shortest path use case finds the shortest path between 2 research papers. This sho
+                                    Sphere of Influence
                                 </div>
                             </div>
                             <hr>
@@ -107,7 +107,8 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    <b>Source : Fields to input the source and target research papers.</b>
+                                    <b>Source : Enter entity scopus_id,subject_code,author_name
+                                        or affiliation ID</b>
                                 </div>
                             </div>
                             <hr>
@@ -118,9 +119,9 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    This use case allows   an   author   to   see   how   their   paper   is
-                                    linked   to   another   paper   by   an   influential   author   whom   they   are   trying   to
-                                    collaborate with.
+                                    This use case allows the user to see the influence for a particular entity
+                                    User can enter Subject Area,Paper, Affiliation Name Or Author and select appropriate
+                                    option
                                 </div>
                             </div>
                         </div>
@@ -130,22 +131,14 @@
                     <div class="row">
                         <div class="panel-card panel">
                             <div class="panel-body">
-                                <div class="container-fluid" ng-controller="ShortestPathController">
-                                    <form role="form" data-ng-submit="shortest_path_query()" class="registration-form">
+                                <div class="container-fluid" ng-controller="SphereInfluence">
+                                    <form role="form" data-ng-submit="sphere_influence_query()" class="registration-form">
                                         <div class="row">
                                             <div class="col-md-5 ">
                                                 <div class="form-group">
-                                                    <label for="paper1">Paper 1: </label>
+                                                    <label for="source">Source</label>
                                                     <div>
-                                                        <input type="paper1" data-ng-model="paper1" id="paper1" class="form-control" placeholder="paper 1" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="paper2">Paper 2: </label>
-                                                    <div>
-                                                        <input type="paper2" data-ng-model="paper2" id="paper2" class="form-control" placeholder="paper 2" required>
+                                                        <input type="text" data-ng-model="source" id="source" class="form-control" placeholder="source" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,13 +148,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <input bs-switch ng-model="all_paths"  switch-change="onChange()" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="checkbox">
-                                            </div>
-                                            <div class="col-md-10">
-                                                <label> Show all paths between papers? (Max dist : 10) </label>
-                                            </div>
+                                        <div>
                                         </div>
                                         <hr>
                                         <div class="row">
