@@ -16,7 +16,9 @@
     "node-uuid": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "sequelize": "latest"
+    "sequelize": "latest",
+    "multer": "latest",
+    "python-shell": "latest"
   },
   "main": "server.js",
   "devDependencies": {},

@@ -55,7 +55,8 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     },
                     initialScale: 0.7,
                     initialTranslate: [250,150],
-                    zoomControls:true
+                    zoomControls:true,
+                    directedEdges : true
                 };
                 //alchemy.begin({"dataSource": response[0]["graph"]})
                 alchemy = new Alchemy(config);

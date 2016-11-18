@@ -16,7 +16,7 @@ module.exports = function() {
         passwordField : 'password'
     },function(email, password, done){
 
-        var query = "select email,password from users where email=:email";
+        var query = "select email,password,approved from users where email=:email";
         sequelize.query(query, { replacements: {email: email}, type: sequelize.QueryTypes.SELECT})
             .then(function(ret) {
                 console.log("returned value is " + JSON.stringify(ret));
@@ -36,7 +36,12 @@ module.exports = function() {
                         });
                     }
                     else{
-                        return done(null,ret[0]);
+                        if(ret[0].approved == 0)
+                            return done(null, false, {
+                                message: "Signing failed: Awaiting approval"
+                            })
+                        else
+                            return done(null,ret[0]);
                     }
                 })
             })

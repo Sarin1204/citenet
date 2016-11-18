@@ -1,0 +1,15 @@
+/**
+ * Created by sarin on 11/12/16.
+ */
+
+var upload_papers = require('../controllers/upload_papers.server.controller');
+
+module.exports = function(app){
+
+    app.route('/api/uploadPapers')
+        .post(upload_papers.uploadPapers);
+
+    app.route('/api/getProgress/:user_email')
+        .get(upload_papers.getProgress);
+
+};

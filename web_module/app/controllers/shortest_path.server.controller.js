@@ -86,7 +86,6 @@ exports.getShortestPath = function(req, res){
     req.on('error', function(e) {
         console.log('problem with request: ' + e.message);
     });
-
     console.log(allPath);
     var qTest="MATCH p=shortestPath((a:Paper{scopus_id:'"+startPaper+"'})-[c:CITES*]-(b:Paper{scopus_id:'"+endPaper+"'})) UNWIND NODES(p) as PNODE RETURN PNODE,c"
 //    var qTest = "MATCH (s:subject_area{code:'2500'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..10]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{code:'2504'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"

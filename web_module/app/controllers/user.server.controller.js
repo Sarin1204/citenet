@@ -11,24 +11,21 @@ exports.signout = function(req, res) {
 };
 
 exports.signup = function(req, res, next) {
-    console.log('inside server controller signup' + JSON.stringify(req.user))
+    console.log('inside server controller signup' + JSON.stringify(req.body))
     if (!req.user) {
        var  email = req.body.email,
            password = req.body.password,
            firstname = req.body.firstname,
            lastname = req.body.lastname,
-           role_id = req.body.role_id
+           role_id = req.body.role_id;
+
+        if(role_id == 1 || role_id == 2)
+            var approved = 0;
+        else
+            var approved=1;
 
         console.log("pass is "+password)
-
-        bcrypt.hash('mypassword', 10, function(err, hash) {
-            if (err) { console.log ("online hash err is "+err); }
-
-            bcrypt.compare('mypassword', hash, function(err, result) {
-                if (err) { console.log ("online compare err is "+err); }
-                console.log("online res is "+result);
-            });
-        });
+        console.log("role id is "+role_id);
 
             bcrypt.hash(password, 10, function(err,hash){
                 console.log("hash is "+hash);
@@ -39,11 +36,15 @@ exports.signup = function(req, res, next) {
                 password = hash;
 
                 // var query = "exec dbo.sp_insert_person 'vipul.sarin@google.com','abcde','Vipul','Sarin'"
-                var query = "insert into users (email, password,firstname,lastname,role_id) values (:email, :password, :firstname, :lastname, :role_id)";
-                sequelize.query(query, { replacements: {email: email, password: password, firstname: firstname, lastname: lastname, role_id: role_id }})
+                var query = "insert into users (email, password,firstname,lastname,role_id,approved) values (:email, :password, :firstname, :lastname, :role_id, :approved)";
+                sequelize.query(query, { replacements: {email: email, password: password, firstname: firstname, lastname: lastname, role_id: role_id, approved: approved }})
                     .then(function(success) {
-                        console.log(JSON.stringify("exec dbo.sp_insert_person successful"));
-                        return res.redirect('/dashboard');
+                        console.log("signup person successful"+JSON.stringify(success));
+                        req.login({"email" : email}, function(err){
+                            if (err) return next(err);
+                            return res.redirect('/');
+                        });
+                        return res.json(success[0]);
                         });
                     })
 

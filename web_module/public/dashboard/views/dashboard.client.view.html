@@ -14,14 +14,14 @@
             <div class=" col-md-10 navbar-collapse" id="top-navbar-1" style="width:83.3%">
                 <ul class="nav navbar-nav" style="float:right">
                     <li class="navbar-li">
-                        <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
+                        {{firstName}}
                     </li>
                     <li class="navbar-li">
                         <a href="#!/dashboard">Home</a>
                     </li>
-                    <li class="navbar-li">
-                        <a href="#!/profileSettings/">
-                            <i class="fa fa-cog"></i>
+                    <li ng-controller="RoleStatusController" ng-show="is_admin == true" class="navbar-li">
+                        <a href="#!/uploadPapers/">
+                            <i class="fa fa-cloud-upload fa-2x"></i>
                         </a>
                     </li>
                     <li style="padding-left:1em">

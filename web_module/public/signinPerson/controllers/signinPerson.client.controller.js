@@ -21,7 +21,7 @@ angular.module('signinPerson').controller('SigninPersonController',['$scope',
 
             }, function(errorResponse){
                 console.log('error'+JSON.stringify(errorResponse));
-                $scope.signin_error = {type: 'alert alert-danger',msg: 'Incorrect sign in details.'};
+                $scope.signin_error = {type: 'alert alert-danger',msg: errorResponse.data.error};
                 $scope.showMessage = true;
                 $timeout(function() {
                     $scope.showMessage = false;

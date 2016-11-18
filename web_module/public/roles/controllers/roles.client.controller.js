@@ -6,7 +6,9 @@ angular.module('roles').controller('RolesController',['$rootScope','$scope', 'Ro
         Roles.getRoles.get(function(response){
             console.log('Roles are '+JSON.stringify(response["roles"]));
             $scope.roles= response["roles"];
-            $scope.role_selected = response["roles"][2]
+            $scope.role_selected = response["roles"][2];
+            console.log("role_selected == "+JSON.stringify($scope.role_selected));
+            $scope.$emit('role', $scope.role_selected.role_id);
 
         },function(error){
             console.log('Roles error: '+JSON.stringify(error));
