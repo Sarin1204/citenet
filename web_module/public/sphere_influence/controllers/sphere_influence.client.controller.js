@@ -12,7 +12,8 @@ angular.module('sphere_influence').controller('SphereInfluence',['$scope',
             var fields = {
                 'source' : $scope.source,
                 'all_paths' : $scope.all_paths,
-                'intermediate_nodes' : $scope.intermediate_nodes
+                'intermediate_nodes' : $scope.intermediate_nodes,
+                'limit':$scope.limit
             };
 
             console.log("fields are "+JSON.stringify(fields));
@@ -28,8 +29,8 @@ angular.module('sphere_influence').controller('SphereInfluence',['$scope',
                     edgeCaption: 'caption',
                     nodeCaptionsOnByDefault: true,
                     edgeCaptionsOnByDefault: true,
-                    nodeTypes: {"type":["Paper","subject_area"]},
-                    edgeTypes: {"type":["CITES","associated_to"]},
+                    nodeTypes: {"type":["Paper","subject_area","author","affiliation"]},
+                    edgeTypes: {"type":["CITES","associated_to","written_by","affiliated_to"]},
                     directedEdges:true,
                     linkDistancefn: function(){ return 800; },
                     nodeStyle: {

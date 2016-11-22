@@ -16,6 +16,7 @@ exports.getIncomingRelation = function(req, res){
     var dataRet;
     var endEntity=req.query.source;
     var entityType=req.query.entitytype;
+    var intermediate_nodes=req.query.intermediate_nodes;
     var req = http.request(options, function(res1) {
         console.log('STATUS: ' + res1.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res1.headers));
@@ -68,14 +69,36 @@ exports.getIncomingRelation = function(req, res){
 
 
 
-    var qTest = "MATCH (n:Paper)-[c:CITES]->(e:Paper{scopus_id:'"+endEntity+"'}) RETURN n,c,e"
+    var qTest = "MATCH path=(n:Paper)-[c:CITES]->(e:Paper{scopus_id:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
     if(entityType.toString()=="Author"){
-        qTest="MATCH (n:Paper)-[c:written_by]->(e:author{name:'"+endEntity+"'}) RETURN n,c,e"
+        qTest="MATCH path=(n:Paper)-[c:written_by]->(e:author{name:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
+        if(intermediate_nodes.toString()=="true"){
+        qTest="MATCH path=(n:Paper)-[c:written_by]->(e:author{name:'"+endEntity+"'}) " +
+            " UNWIND NODES(path) as pnode WITH pnode,c" +
+            " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+        }
     }else if(entityType.toString()=="Affiliation"){
-        qTest="MATCH (n:Paper)-[c:affiliated_to]->(e:affiliation{affilname:'"+endEntity+"'}) RETURN n,c,e"
+        qTest="MATCH path=(n:Paper)-[c:affiliated_to]->(e:affiliation{affilname:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
+        if(intermediate_nodes.toString()=="true"){
+            qTest="MATCH path=(n:Paper)-[c:affiliated_to]->(e:affiliation{affilname:'"+endEntity+"'}) " +
+                " UNWIND NODES(path) as pnode WITH pnode,c" +
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+        }
     }else if(entityType.toString()=="SubjectArea"){
-        qTest="MATCH (n:Paper)-[c:associated_to]->(e:subject_area{code:'"+endEntity+"'}) RETURN n,c,e"
+        qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{code:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
+        if(intermediate_nodes.toString()=="true"){
+            qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{code:'"+endEntity+"'}) " +
+                " UNWIND NODES(path) as pnode WITH pnode,c" +
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+        }
+    }else{
+        if(intermediate_nodes.toString()=="true"){
+            qTest="MATCH path=(n:Paper)-[c:CITES]->(e:Paper{scopus_id:'"+endEntity+"'}) " +
+                " UNWIND NODES(path) as pnode WITH pnode,c" +
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+        }
     }
+    console.log(qTest);
     var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
     req.write(queryTest);
     req.end();

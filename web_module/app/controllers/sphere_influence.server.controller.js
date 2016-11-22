@@ -19,6 +19,8 @@ exports.getSphereInfluence = function(req, res){
     };
     var dataRet;
     var startSource=req.query.source;
+    var intermediate_nodes=req.query.intermediate_nodes;
+    var limit=req.query.limit;
     var req = http.request(options, function(res1) {
         console.log('STATUS: ' + res1.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res1.headers));
@@ -51,7 +53,7 @@ exports.getSphereInfluence = function(req, res){
                     var found = nodes.filter(function (m) { return m.id == n.id; }).length > 0;
                     if (!found) {
                         var node = n.properties||{}; node.id=n.id;node.type=n.labels[0];
-                        node.caption=n.properties.title||n.properties.text;
+                        node.caption=n.properties.title||n.properties.text||n.properties.name||n.properties.affilname;
                         nodes.push(node);
                         if (labels.indexOf(node.type) == -1) labels.push(node.type);
                     }
@@ -69,9 +71,21 @@ exports.getSphereInfluence = function(req, res){
         console.log('problem with request: ' + e.message);
     });
 
+    console.log(limit);
+    var uppLimit=3;
+    if(parseInt(limit.toString())!=NaN&&parseInt(limit.toString())>0){
+        uppLimit=limit;
+    }
 
+    var qTest = "MATCH (n:Paper{scopus_id:'"+startSource+"'})-[c:CITES*1.."+uppLimit+"]->(e:Paper) RETURN n,c,e";
+    if(intermediate_nodes.toString()=="true"){
+        qTest="MATCH path=(n:Paper{scopus_id:'"+startSource+"'})-[c:CITES*1.."+uppLimit+"]->(e:Paper)" +
+            " UNWIND NODES(path) as PNODE WITH PNODE,c " +
+            " MATCH (PNODE:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) " +
+            " RETURN PNODE,c,in,nodes"
+    }
 
-    var qTest = "MATCH (n:Paper{scopus_id:'"+startSource+"'})-[c:CITES*1..3]->(e:Paper) RETURN n,c,e"
+    console.log(qTest);
     var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
 
     req.write(queryTest);
