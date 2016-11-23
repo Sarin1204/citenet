@@ -2,12 +2,13 @@
  * Created by vipul on 4/23/2016.
  */
 
-var Sequelize = require('sequelize');
+var Sequelize = require('sequelize'),
+    config = require('./config.js');
 
-var sequelize = new Sequelize('citenet', 'root', 'admin', {
+var sequelize = new Sequelize(config.dbname, config.dbuser, config.dbpassword, {
     host: 'localhost',
     dialect: "mysql", // or 'sqlite', 'postgres', 'mariadb'
-    port:    3300, // or 5432 (for postgres)
+    port:    config.dbport, // or 5432 (for postgres)
     logging: console.log
 });
 sequelize

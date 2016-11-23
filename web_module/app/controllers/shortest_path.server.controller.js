@@ -2,7 +2,8 @@
  * Created by sarin on 11/8/16.
  */
 
-var http = require("http");
+var http = require("http"),
+    config = require('../../config/config.js');
 
 exports.getShortestPath = function(req, res){
 
@@ -12,7 +13,7 @@ exports.getShortestPath = function(req, res){
         port:7474,
         path:'/db/data/transaction/commit',
         method:'POST',
-        auth:'neo4j:Dhruvra!591'
+        auth:config.neoAuth
     };
     var dataRet;
     var startPaper=req.query.paper1;

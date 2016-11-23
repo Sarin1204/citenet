@@ -1,7 +1,8 @@
 /**
  * Created by Dhruvraj on 11/14/2016.
  */
-var http = require("http");
+var http = require("http"),
+    config = require('../../config/config.js');
 
 exports.getIncomingRelation = function(req, res){
 
@@ -11,7 +12,7 @@ exports.getIncomingRelation = function(req, res){
         port:7474,
         path:'/db/data/transaction/commit',
         method:'POST',
-        auth:'neo4j:Dhruvra!591'
+        auth:config.neoAuth
     };
     var dataRet;
     var endEntity=req.query.source;

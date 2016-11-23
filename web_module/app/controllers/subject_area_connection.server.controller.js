@@ -1,7 +1,8 @@
 /**
  * Created by Dhruvraj on 11/11/2016.
  */
-var http = require("http");
+var http = require("http"),
+    config = require('../../config/config.js');
 
 exports.getSubjAreaConn = function(req, res) {
 
@@ -12,7 +13,7 @@ exports.getSubjAreaConn = function(req, res) {
         port: 7474,
         path: '/db/data/transaction/commit',
         method: 'POST',
-        auth: 'neo4j:Dhruvra!591'
+        auth: config.neoAuth
     };
     var dataRet;
     var start_entity = req.query.subjectArea1;
