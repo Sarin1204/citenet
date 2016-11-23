@@ -90,12 +90,13 @@ exports.getShortestPath = function(req, res){
     var qTest="MATCH p=shortestPath((a:Paper{scopus_id:'"+startPaper+"'})-[c:CITES*]-(b:Paper{scopus_id:'"+endPaper+"'})) UNWIND NODES(p) as PNODE RETURN PNODE,c"
 //    var qTest = "MATCH (s:subject_area{code:'2500'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..10]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{code:'2504'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
     if(allPath.toString()=="true"){
-        qTest="MATCH (a:Paper{scopus_id:'"+startPaper+"'})-[r1]-()-[r2]-(b:Paper{scopus_id:'"+endPaper+"'}) RETURN a,r1,r2,b";
+        qTest="MATCH p=(a:Paper{scopus_id:'"+startPaper+"'})-[c*0..3]-(b:Paper{scopus_id:'"+endPaper+"'}) UNWIND NODES(p) as PNODE RETURN PNODE,c";
     }
     if(intermediate_nodes.toString()=="true"){
      qTest="MATCH p=shortestPath((a:Paper{scopus_id:'"+startPaper+"'})-[c:CITES*]-(b:Paper{scopus_id:'"+endPaper+"'})) UNWIND NODES(p) as PNODE WITH PNODE,c MATCH (PNODE)-[in]-(d) RETURN PNODE,c,in,d"
         if(allPath.toString()=="true"){
-            qTest="MATCH (a:Paper{scopus_id:'"+startPaper+"'})-[r1]-(d)-[r2]-(b:Paper{scopus_id:'"+endPaper+"'}) WITH a,r1,d,r2,b MATCH (d)-[in]-(d1) RETURN a,r1,r2,b,d,d1,in";
+            qTest="MATCH p=(a:Paper{scopus_id:'"+startPaper+"'})-[c*0..3]-(b:Paper{scopus_id:'"+endPaper+"'}) UNWIND NODES(p) as PNODE WITH PNODE,c" +
+                " MATCH (PNODE:Paper)-[in]-(end) RETURN PNODE,c,in,end";
         }
     }
     console.log("Query is"+qTest);
