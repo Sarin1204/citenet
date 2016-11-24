@@ -85,7 +85,8 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     },
                     initialScale: 0.5,
                     initialTranslate: [250,150],
-                    zoomControls:true
+                    zoomControls:true,
+                    edgeOverlayWidth: 30
                 };
                 //alchemy.begin({"dataSource": response[0]["graph"]})
                 alchemy = new Alchemy(config);
@@ -94,7 +95,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
             },function(error){
                 console.log('Error in getShortestPath '+error);
                 alertify.logPosition("top right");
-                alertify.error("Error occured: "+error);
+                alertify.error("Error occured: "+JSON.stringify(error));
             });
 
         };

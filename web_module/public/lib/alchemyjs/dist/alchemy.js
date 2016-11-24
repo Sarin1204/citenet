@@ -1898,17 +1898,15 @@
           edgeLength = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
           ({
             captionAngle: function(angle) {
-              if (angle < -90 || angle > 90) {
-                return 180;
-              } else {
-                return 0;
-              }
+             return 0;
             }
           });
           dx = edgeLength / 2;
           dy = -d['stroke-width'] * 2;
           return d3.select(this).attr('dx', "" + dx).attr("dy", "" + dy).select(".textpath").text(d.caption).attr("xlink:xlink:href", "#path-" + d.source.id + "-" + d.target.id).style("display", function(d) {
-            if (conf.edgeCaptionsOnByDefault) {
+              //Vipul add edge caption to bottom
+              //$("#captions").text(d.caption);
+              if (conf.edgeCaptionsOnByDefault) {
               return "block";
             }
           });
@@ -1982,6 +1980,19 @@
         }).text(function(d) {
           return utils.nodeText(d);
         }).style("display", function(d) {
+            //Vipul fix for adding node captions to bottom of graph
+            var caption = "<p>"
+             prop = d.self.getProperties();
+            caption+='<span class="label label-primary">'+prop["type"]+'</span> '
+             for (var key in prop) {
+             if (prop.hasOwnProperty(key) && key != "caption" && key!= "type") {
+                caption+="<strong>"+key+"</strong>: "+prop[key] + " | "
+                }
+             }
+            var pos = caption.lastIndexOf('|');
+             caption = caption.substring(0,pos) + caption.substring(pos+1);
+             caption += "</p>";
+             $("#captions").html(caption);
           if (conf.nodeCaptionsOnByDefault) {
             return "block";
           }
