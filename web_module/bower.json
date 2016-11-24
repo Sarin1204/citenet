@@ -13,6 +13,7 @@
     "angular-bootstrap-switch" : "latest",
     "alchemyjs" : "latest",
     "ng-file-upload" : "latest",
-    "angular-bootstrap-file-field" : "latest"
+    "angular-bootstrap-file-field" : "latest",
+    "alertifyjs" : "latest"
   }
 }

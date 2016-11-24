@@ -2,8 +2,8 @@
  * Created by vipul on 4/27/2016.
  */
 angular.module('shortest_path').controller('ShortestPathController',['$scope',
-    '$routeParams', '$location','ShortestPath','getUser',
-    function($scope, $routeParams, $location, ShortestPath,getUser){
+    '$routeParams', '$location','ShortestPath','getUser','alertify',
+    function($scope, $routeParams, $location, ShortestPath,getUser,alertify){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = true;
@@ -27,6 +27,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     dataSource : response[0]["graph"],
                     nodeCaption: 'caption',
                     forceLocked:false,
+                    alpha: 0.2,
                     edgeCaption: 'caption',
                     nodeCaptionsOnByDefault: true,
                     edgeCaptionsOnByDefault: true,
@@ -61,32 +62,39 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                         }
                     },
                     edgeStyle: {
+                        "all":{
+                          "opacity":0.4
+                        },
                         "CITES": {
                             "color": "#990921",
-                            "width":2,
-                            "borderWidth": 10
+                            "width":4,
+                            "borderWidth": 10,
                         },
                         "associated_to": {
                             "color": "#2e377c",
-                            "width":1
+                            "width":4
                         },
                         "affiliated_to": {
                             "color": "#2a6815",
-                            "width":1
+                            "width":4
                         },
                         "written_by":{
                             "color": "rgb(0,255,0)",
-                            "width":1
+                            "width":4
                         }
                     },
-                    initialScale: 1.4,
+                    initialScale: 0.5,
                     initialTranslate: [250,150],
                     zoomControls:true
                 };
                 //alchemy.begin({"dataSource": response[0]["graph"]})
                 alchemy = new Alchemy(config);
+                alertify.logPosition("top right");
+                alertify.success("Success! Check out your graph!");
             },function(error){
                 console.log('Error in getShortestPath '+error);
+                alertify.logPosition("top right");
+                alertify.error("Error occured: "+error);
             });
 
         };
