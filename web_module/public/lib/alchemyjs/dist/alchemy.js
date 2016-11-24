@@ -1691,7 +1691,7 @@
     edgeClick: null,
     search: false,
     searchMethod: "contains",
-    backgroundColour: "#000000",
+    backgroundColour: "#FFFFFF",
     theme: null,
     afterLoad: 'afterLoad',
     divSelector: '#alchemy',

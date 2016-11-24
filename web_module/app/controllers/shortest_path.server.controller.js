@@ -57,7 +57,6 @@ exports.getShortestPath = function(req, res){
 
         res1.on('end', function(){
             dataRet = dataRet.replace("undefined","");
-            console.log("In end ========> dataRet ======>"+dataRet);
             var res1 = JSON.parse(dataRet);
             var nodes = [];
             var rels = [];
@@ -100,7 +99,10 @@ exports.getShortestPath = function(req, res){
                 " MATCH (PNODE:Paper)-[in]-(end) RETURN PNODE,c,in,end";
         }
     }
-    console.log("Query is"+qTest);
+
+
+    qTest=qTest+" LIMIT 100";
+    console.log(qTest);
     var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
 
     req.write(queryTest);

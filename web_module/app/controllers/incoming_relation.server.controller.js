@@ -99,6 +99,9 @@ exports.getIncomingRelation = function(req, res){
                 " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
         }
     }
+
+
+    qTest=qTest+" LIMIT 100";
     console.log(qTest);
     var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
     req.write(queryTest);

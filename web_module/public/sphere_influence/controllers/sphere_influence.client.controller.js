@@ -26,34 +26,60 @@ angular.module('sphere_influence').controller('SphereInfluence',['$scope',
                 var config = {
                     dataSource : response[0]["graph"],
                     nodeCaption: 'caption',
+                    forceLocked:false,
                     edgeCaption: 'caption',
                     nodeCaptionsOnByDefault: true,
                     edgeCaptionsOnByDefault: true,
                     nodeTypes: {"type":["Paper","subject_area","author","affiliation"]},
-                    edgeTypes: {"type":["CITES","associated_to","written_by","affiliated_to"]},
+                    edgeTypes: {"caption":["CITES","associated_to","affiliated_to","written_by"]},
                     directedEdges:true,
                     linkDistancefn: function(){ return 800; },
                     nodeStyle: {
                         "Paper": {
                             "color":'#1B9E77',
-                            "borderColor": "None",
-                            "radius"     : 20
+                            "borderColor": "#136d52",
+                            "borderWidth": 6,
+                            "radius"     : 44
                         },
                         "subject_area": {
                             "color":'#D95F02',
-                            "borderColor": "None",
-                            "radius"     : 20
+                            "borderWidth": 6,
+                            "borderColor": "#ad4b00",
+                            "radius"     : 44
+                        },
+                        "author": {
+                            "color":'#eded5c',
+                            "borderWidth": 6,
+                            "borderColor": "#a3a33f",
+                            "radius"     : 44
+                        },
+                        "affiliation": {
+                            "color":'#c060c1',
+                            "borderWidth": 6,
+                            "borderColor": "#904891",
+                            "radius"     : 44
                         }
                     },
                     edgeStyle: {
                         "CITES": {
-                            color: "#ff00f3"
+                            "color": "#990921",
+                            "width":2,
+                            "borderWidth": 10
                         },
                         "associated_to": {
-                            color: "#00fffa"
+                            "color": "#2e377c",
+                            "width":1
+                        },
+                        "affiliated_to": {
+                            "color": "#2a6815",
+                            "width":1
+                        },
+                        "written_by":{
+                            "color": "rgb(0,255,0)",
+                            "width":1
                         }
                     },
-                    initialScale: 0.7,
+                    initialScale: 1.4,
                     initialTranslate: [250,150],
                     zoomControls:true
                 };
