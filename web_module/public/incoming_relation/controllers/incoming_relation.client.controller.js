@@ -7,17 +7,17 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = true;
-        $scope.entitytype='Paper';
         $scope.myFieldLabel="Select a source entity to see all it's incoming relations";
+        $scope.entityType = "Paper";
         $scope.newValue = function() {
             $scope.source=""
             if($scope.entitytype=='Paper'){
                 $scope.myFieldLabel="Enter the paper for viewing others that cite it";
-            }else if($scope.entitytype=='Author'){
+            }else if($scope.entityType=='Author'){
                 $scope.myFieldLabel="Enter author name to see his publications";
-            }else if($scope.entitytype=='SubjectArea'){
+            }else if($scope.entityType=='SubjectArea'){
                 $scope.myFieldLabel="Enter subject area to see it's associated papers";
-            }else if($scope.entitytype=='Affiliation'){
+            }else if($scope.entityType=='Affiliation'){
                 $scope.myFieldLabel="Enter affiliation name to see it's associated papers";
             }
         }
@@ -25,7 +25,7 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
             console.log('Inside shortest_path_query');
             var fields = {
                 'source' : $scope.source,
-                'entitytype' : $scope.entitytype,
+                'entitytype' : $scope.entityType,
                 'all_paths' : $scope.all_paths,
                 'intermediate_nodes' : $scope.intermediate_nodes
             };

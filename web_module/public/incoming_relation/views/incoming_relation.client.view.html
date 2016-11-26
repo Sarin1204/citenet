@@ -132,13 +132,13 @@
                                     <form role="form" data-ng-submit="incoming_relation_query()" class="registration-form">
                                         <div>
                                             <label>Please select the type of entity</label><br>
-                                            <input type="radio"  ng-model="entitytype" value="Paper" ng-change='newValue()'>
+                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Paper" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                             <label> Paper </label>
-                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="SubjectArea" ng-change='newValue()'>
+                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="SubjectArea" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                             <label> Subject Area </label>
-                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Author" ng-change='newValue()'>
+                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Author" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                             <label>  Author    </label>
-                                            <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Affiliation" ng-change='newValue()'>
+                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Affiliation" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                             <label> Affiliation </label>
                                         </div>
                                         <br>
