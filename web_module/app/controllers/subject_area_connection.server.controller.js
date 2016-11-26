@@ -73,7 +73,7 @@ exports.getSubjAreaConn = function(req, res) {
         console.log('problem with request: ' + e.message);
     });
 
-    var qTest = "MATCH (s:subject_area{code:'" + start_entity + "'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{code:'" + end_entity + "'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
+    var qTest = "MATCH (s:subject_area{text:'" + start_entity + "'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{text:'" + end_entity + "'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
     var authTest = "MATCH (s:author{name:'" + start_entity + "'})<-[a:written_by]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:written_by*0..3]->(e:author{name:'" + end_entity + "'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
     var affTest = "MATCH (s:affiliation{affilname:'" + start_entity + "'})<-[a:affiliated_to]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:affiliated_to*0..3]->(e:affiliation{affilname:'" + end_entity + "'}) RETURN COLLECT(distinct p1) as pw,s,a,p,c,b,e"
     console.log(intermediate_nodes);
@@ -94,7 +94,8 @@ exports.getSubjAreaConn = function(req, res) {
     }
     else {
         if (intermediate_nodes.toString() == "true") {
-            qTest = "MATCH path=(s:subject_area{code:'" + start_entity + "'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:associated_to*0..3]->(e:subject_area{code:'" + end_entity + "'})" +
+            qTest = "MATCH path=(s:subject_area{text:'" + start_entity + "'})<-[a:associated_to]-(p:Paper)-[c:CITES*0..3]->(p1:Paper)-[b:associated_to*0..3]->" +
+                "(e:subject_area{text:'" + end_entity + "'})" +
                 " UNWIND NODES(path) as PNODE WITH PNODE,a,c,b " +
                 " MATCH (PNODE:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes)  RETURN PNODE,a,c,b,in,nodes"
         }

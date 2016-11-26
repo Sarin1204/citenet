@@ -1,0 +1,116 @@
+<nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="/img/citenet_asu_logo.png" style="height:66px">
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=" col-md-10 navbar-collapse" id="top-navbar-1" style="width:83.3%">
+                <ul class="nav navbar-nav" style="float:right">
+                    <li class="navbar-li">
+                        {{firstName}}
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/dashboard">Home</a>
+                    </li>
+                    <li ng-controller="RoleStatusController" ng-show="is_admin == true" class="navbar-li">
+                        <a href="#!/uploadPapers/">
+                            <i class="fa fa-cloud-upload fa-2x"></i>
+                        </a>
+                    </li>
+                    <li style="padding-left:1em">
+                    <span class="li-social">
+                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1" style="padding-left:0px; width:10%; padding-right:0px">
+                    <div class="panel-card panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Get started
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/shortest_path"><button style="padding:13px 20px" type="button" class="btn btn-primary btn-lg">
+                                        <i class="fa fa-arrows-h fa-2x"></i>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/subject_area_connection"><button style="padding:13px 16px" type="button" class="btn btn-success btn-lg">
+                                        <i class="fa fa-handshake-o fa-2x"></i>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/sphere_influence">
+                                        <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
+                                            <i class="fa fa-globe fa-2x"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/incoming_relation">
+                                        <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
+                                            <i class="fa fa-share-alt fa-2x"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="panel-card panel panel-default">
+                            <div class="panel-body" style="height:605px;overflow-y: scroll;">
+                                <div class="container-fluid" ng-controller="AdminController">
+                                       <h3>Manage Users</h3>
+                                        <br>
+                                        <table style="border: 1px solid black;width:100%;border-collapse: collapse;">
+                                            <tr ng-repeat="x in names" id="$index">
+                                                <td style="padding-top:10px">{{ x.email }}</td>
+                                                <td style="padding-left:350px;padding-top:10px">
+                                                    <input type="button" class="btn btn-danger" value="Delete"  ng-model="delete" ng-click="deleteUser(x.email)"/>
+                                                </td>
+                                                <td style="padding-left:30px;padding-top:10px">
+                                                    <input ng-if="x.approved==0" type="button" class="btn btn-primary" value="Approve" ng-model="approve" ng-click="approveUser(x.email)"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

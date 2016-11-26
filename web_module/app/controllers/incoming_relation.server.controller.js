@@ -86,9 +86,9 @@ exports.getIncomingRelation = function(req, res){
                 " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
         }
     }else if(entityType.toString()=="SubjectArea"){
-        qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{code:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
+        qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{text:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
         if(intermediate_nodes.toString()=="true"){
-            qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{code:'"+endEntity+"'}) " +
+            qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{text:'"+endEntity+"'}) " +
                 " UNWIND NODES(path) as pnode WITH pnode,c" +
                 " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
         }

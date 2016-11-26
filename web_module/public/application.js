@@ -3,7 +3,7 @@
  */
 var mainApplicationModuleName = 'citenet';
 var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap','ui.select','ngSanitize','frapontillo.bootstrap-switch','ngFileUpload',
-    'ngAlertify','auth','home','getUser','signupPerson','signinPerson','dashboard','roles','roleStatus','upload_papers','shortest_path','subject_area_connection','sphere_influence','incoming_relation','typeahead']);
+    'ngAlertify','auth','home','getUser','signupPerson','signinPerson','dashboard','roles','roleStatus','upload_papers','shortest_path','subject_area_connection','sphere_influence','incoming_relation','typeahead','admin']);
 mainApplicationModule.config(['$locationProvider','$httpProvider',
     function($locationProvider,$httpProvider){
         $locationProvider.hashPrefix('!');

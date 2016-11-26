@@ -30,6 +30,7 @@ angular.module('sphere_influence').controller('SphereInfluence',['$scope',
                         //alchemy.begin({"dataSource": response[0]["graph"]})
                         alchemy = new Alchemy(config);
                     })
+
             },function(error){
                 console.log('Error in getSphereInfluence '+JSON.stringify(error));
             });
