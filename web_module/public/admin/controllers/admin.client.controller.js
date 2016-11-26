@@ -2,8 +2,8 @@
  * Created by vipul on 4/27/2016.
  */
 angular.module('admin').controller('AdminController',['$scope','$route',
-    '$routeParams', '$location','Admin','getUser',
-    function($scope, $routeParams, $location, $route, Admin, getUser, $http){
+    '$routeParams', '$location','Admin',
+    function($scope, $route, $routeParams, $location, Admin){
         console.log("inside AdminController");
        var userArray=new Array();
        var users=Admin.displayUsers.query(function(response){
