@@ -52,8 +52,9 @@ module.exports = function () {
     require('../app/routes/subject_area_connection.server.route.js')(app);
     require('../app/routes/sphere_influence.server.route.js')(app);
     require('../app/routes/incoming_relation.server.route.js')(app);
+    require('../app/routes/upload_papers.server.route.js')(app);
+    require('../app/routes/typeahead.server.route.js')(app);
 
-   require('../app/routes/upload_papers.server.route.js')(app);
     app.use(express.static('./public'));
 
     return app;
