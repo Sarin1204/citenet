@@ -132,18 +132,18 @@
                                 <div class="container-fluid" ng-controller="SubjectAreaConn">
                                     <div>
                                         <label>Please select the type of entity</label><br>
-                                        <input type="radio" ng-model="entitytype" value="SubjectArea" ng-change='newValue(  )'>
+                                        <input bs-switch ng-model="entityType"  switch-change="newValue()" value="SubjectArea" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                         <label> Subject Area </label>
-                                        <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Author" ng-change='newValue()'>
+                                        <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Author" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                         <label>  Author    </label>
-                                        <input type="radio" style="margin-left: 50px" ng-model="entitytype" value="Affiliation" ng-change='newValue()'>
+                                        <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Affiliation" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
                                         <label> Affiliation </label>
                                     </div>
-                                    <form role="form" data-ng-submit="subject_area_connection_query()" class="registration-form">
-                                        <div class="row" >
+                                    <form role="form"  data-ng-submit="subject_area_connection_query()" class="registration-form">
+                                        <div class="row" ng-controller="typeAheadController" >
                                             <br>
                                             <div class="col-md-5 ">
-                                                <div class="form-group" ng-controller="typeAheadController">
+                                                <div class="form-group">
                                                     <label for="subjectArea1">Entity 1: </label>
                                                     <input type="text"  typeahead-append-to-body="true" placeholder="Search..." ng-model="subjectArea1" id="subjectArea1"
                                                            uib-typeahead="subject for subject in getSubjects($viewValue)" typeahead-loading="loadingSubjects" typeahead-no-results="noResults"
@@ -155,8 +155,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
-                                                <div class="form-group" ng-controller="typeAheadController">
-                                                    <label for="subjectArea1">Entity 2: </label>
+                                                <div class="form-group">
+                                                    <label for="subjectArea2">Entity 2: </label>
                                                     <input type="text"  typeahead-append-to-body="true" placeholder="Search..." ng-model="subjectArea2" id="subjectArea2"
                                                            uib-typeahead="subject for subject in getSubjects($viewValue)" typeahead-loading="loadingSubjects" typeahead-no-results="noResults"
                                                            typeahead-min-length="2" class="form-control">

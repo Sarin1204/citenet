@@ -7,13 +7,14 @@ angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope'
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = true;
-        $scope.entitytype='SubjectArea';
+        $scope.entityType='SubjectArea';
+        $scope.child = {}
         $scope.subject_area_connection_query = function(){
             console.log('Inside subject_area_connection_query');
             var fields = {
-                'subjectArea1' : $scope.subjectArea1,
-                'subjectArea2' : $scope.subjectArea2,
-                'entitytype':    $scope.entitytype,
+                'subjectArea1' : $scope.child.subjectArea1,
+                'subjectArea2' : $scope.child.subjectArea2,
+                'entitytype':    $scope.entityType,
                 'all_paths' : $scope.all_paths,
                 'intermediate_nodes' : $scope.intermediate_nodes
             };

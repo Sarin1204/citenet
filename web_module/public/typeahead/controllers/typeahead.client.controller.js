@@ -3,6 +3,8 @@
  */
 angular.module('typeahead').controller('typeAheadController',['$scope','Typeahead',
     function($scope, Typeahead){
+        var parentScope = $scope.$parent;
+        parentScope.child = $scope;
         return $scope.getSubjects = function(val) {
             var SubjectAreas = Typeahead.typeAheadSubjects.get({"val":val});
 
