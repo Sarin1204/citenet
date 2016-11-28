@@ -4,9 +4,9 @@
 angular.module('typeahead').factory('Typeahead',['$resource',
     function($resource){
         return{
-            typeAheadSubjects: $resource('api/typeAheadSubjects/:val',{
-                val: '@val'
-
+            typeAheadSubjects: $resource('api/typeAheadSubjects/:val/:entityType',{
+                val: '@val',
+                entityType: '@entityType'
             })
         }
     }

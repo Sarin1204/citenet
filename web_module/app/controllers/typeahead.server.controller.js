@@ -6,7 +6,9 @@ var http = require("http"),
     config = require('../../config/config.js');
 
 exports.typeAheadSubjectAreas = function(req, res){
+    console.log("Params " +JSON.stringify(req.params));
     var val = req.params.val;
+    var entityType = req.params.entityType;
     var dataRet;
     //return status 200 with subject area data if exists
     var subject_areas_exist = true;
@@ -61,7 +63,11 @@ exports.typeAheadSubjectAreas = function(req, res){
 
         console.log(val.toString());
         var qTest = "MATCH (s:subject_area) WHERE s.text=~'.*"+val.toString()+".*' RETURN s"
-        console.log(qTest);
+        if(entityType=="Author"){
+            qTest = "MATCH (s:author) WHERE s.name=~'.*"+val.toString()+".*' RETURN s"
+        }else if(entityType=="Affiliation"){
+            qTest = "MATCH (s:affiliation) WHERE s.affilname=~'.*"+val.toString()+".*' RETURN s"
+        }
         var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
         console.log(qTest);
         req.write(queryTest);

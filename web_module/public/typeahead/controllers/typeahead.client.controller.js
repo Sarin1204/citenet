@@ -6,13 +6,12 @@ angular.module('typeahead').controller('typeAheadController',['$scope','Typeahea
         var parentScope = $scope.$parent;
         parentScope.child = $scope;
         return $scope.getSubjects = function(val) {
-            var SubjectAreas = Typeahead.typeAheadSubjects.get({"val":val});
-
+            var SubjectAreas = Typeahead.typeAheadSubjects.get({"val":val,"entityType":parentScope.entityType});
             return SubjectAreas.$promise.then(function(response){
-                console.log('Response for typeAheadSubjects is '+JSON.stringify(response.subjects));
+                console.log('Response for typeAhead is '+JSON.stringify(response.subjects));
                 return response.subjects;
             }, function(error){
-                console.log('Error response for typeAheadSubjects'+JSON.stringify(error));
+                console.log('Error response for typeAhead'+JSON.stringify(error));
                 return undefined
             })
 

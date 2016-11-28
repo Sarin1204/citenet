@@ -4,6 +4,6 @@
 var typeaheadController = require('../controllers/typeahead.server.controller');
 
 module.exports = function(app){
-    app.route('/api/typeAheadSubjects/:val')
+    app.route('/api/typeAheadSubjects/:val/:entityType')
         .get(typeaheadController.typeAheadSubjectAreas)
 };
