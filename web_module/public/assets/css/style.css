@@ -21,6 +21,13 @@ div.replycard{
 li.typeahead{
     background-color : #ebeef4;
 }
+.tooltipClass{
+	max-width:500px!important;
+}
+h3.nomargin{
+	margin-top:0px;
+	margin-bottom:0px;
+}
 
 #filtersubmit {
     position: relative;

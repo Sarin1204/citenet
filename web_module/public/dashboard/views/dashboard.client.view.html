@@ -82,7 +82,7 @@
                                 <div class="panel-card panel">
                                     <div class="panel-body" style="padding-left:10px">
                                         <a href="#!/incoming_relation">
-                                            <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
+                                            <button style="padding:13px 25px" type="button" class="btn btn-danger btn-lg">
                                                 <i class="fa fa-share-alt fa-2x"></i>
                                             </button>
                                         </a>
@@ -92,10 +92,11 @@
                     </div>
                 </div>
                 <div class="col-md-10" ng-controller="DashboardController">
-                    <div class="panel-card panel panel-default">
+                    <div ng-intro-options="IntroOptions" ng-intro-method="CallMe" ng-intro-autostart="true" ></div>
+                    <div id="shortestPathPanel" class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title text-center">
-                                <h3>Shortest Path</h3>
+                                <h3 class="nomargin">Shortest Path</h3>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -112,10 +113,10 @@
                         </div>
                     </div>
 
-                    <div class="panel-card panel panel-default">
+                    <div id="entityConnectionPanel" class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title text-center">
-                                <h3>Entity Connection</h3>
+                                <h3 class="nomargin">Entity Connection</h3>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -132,10 +133,10 @@
                         </div>
                     </div>
 
-                    <div class="panel-card panel panel-default">
+                    <div id="sphereInfluencePanel" class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title text-center">
-                                <h3>Sphere Of Influence</h3>
+                                <h3 class="nomargin">Sphere Of Influence</h3>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -152,10 +153,10 @@
                         </div>
                     </div>
 
-                    <div class="panel-card panel panel-default">
+                    <div id="incomingRelationPanel" class="panel-card panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title text-center">
-                                <h3>Incoming Relation</h3>
+                                <h3 class="nomargin">Incoming Relation</h3>
                             </div>
                         </div>
                         <div class="panel-body">
