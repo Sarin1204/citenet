@@ -6,6 +6,8 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
     function($scope, $routeParams, $location, ShortestPath,getUser,alertify,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
+        $scope.query_empty = '';
+        $scope.showMessage = false;
         $scope.intermediate_nodes = false;
         $scope.shortest_path_query = function(){
             console.log('Inside shortest_path_query');
@@ -25,6 +27,12 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
+                        if(response[0]["graph"]["nodes"].length==0){
+                            $scope.query_empty = {type: 'alert alert-danger',msg: "This query returned no result. Please try other values"};
+                            $scope.showMessage = true;
+                        }else{
+                            $scope.showMessage=false;
+                        }
                         config.graphHeight = function(){
                             return 450;
                         }
@@ -33,8 +41,10 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                         myEl.remove();
                         //alchemy.begin({"dataSource": response[0]["graph"]})
                         alchemy = new Alchemy(config);
+                        if(response[0]["graph"]["nodes"].length!=0){
                         alertify.logPosition("top right");
                         alertify.success("Success! Check out your graph!");
+                        }
                     })
             },function(error){
                 console.log('Error in getShortestPath '+error);

@@ -2,10 +2,12 @@
  * Created by Dhruvraj on 4/27/2016.
  */
 angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope',
-    '$routeParams', '$location','SubjectAreaConn','getUser','$http',
-    function($scope, $routeParams, $location, SubjectAreaConn,getUser,$http){
+    '$routeParams', '$location','SubjectAreaConn','getUser','$http','$timeout',
+    function($scope, $routeParams, $location, SubjectAreaConn,getUser,$http,$timeout){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
+        $scope.query_empty = '';
+        $scope.showMessage = false;
         $scope.intermediate_nodes = false;
         $scope.entityType='SubjectArea';
         $scope.child = {}
@@ -28,6 +30,12 @@ angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope'
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
+                        if(response[0]["graph"]["nodes"].length==0){
+                            $scope.query_empty = {type: 'alert alert-danger',msg: "This query returned no result. Please try other values"};
+                            $scope.showMessage = true;
+                        }else{
+                            $scope.showMessage=false;
+                        }
                         config.graphHeight = function(){
                             return 450;
                         }

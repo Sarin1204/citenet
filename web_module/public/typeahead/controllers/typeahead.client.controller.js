@@ -6,6 +6,7 @@ angular.module('typeahead').controller('typeAheadController',['$scope','Typeahea
         var parentScope = $scope.$parent;
         parentScope.child = $scope;
         return $scope.getSubjects = function(val) {
+            parentScope.showMessage=false;
             var SubjectAreas = Typeahead.typeAheadSubjects.get({"val":val,"entityType":parentScope.entityType});
             return SubjectAreas.$promise.then(function(response){
                 console.log('Response for typeAhead is '+JSON.stringify(response.subjects));

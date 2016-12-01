@@ -7,6 +7,8 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = false;
+        $scope.query_empty = '';
+        $scope.showMessage = false;
         $scope.myFieldLabel="Select a source entity to see all it's incoming relations";
         $scope.entityType = "Paper";
         $scope.newValue = function() {
@@ -39,6 +41,12 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
+                        if(response[0]["graph"]["nodes"].length==0){
+                            $scope.query_empty = {type: 'alert alert-danger',msg: "This query returned no result. Please try other values"};
+                            $scope.showMessage = true;
+                        }else{
+                            $scope.showMessage=false;
+                        }
                         config.graphHeight = function(){
                             return 450;
                         }
