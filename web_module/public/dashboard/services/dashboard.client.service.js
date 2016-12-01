@@ -4,8 +4,10 @@
 angular.module('dashboard').factory('Dashboard',['$resource',
     function($resource) {
         return {
-            getTopRequests:  $resource('/api/getTopRequests'),
-            getTopServices: $resource('/api/getTopServices')
+            getShortestPath:  $resource('/api/getShortestPath'),
+            getSubjAreaConn:  $resource('/api/getSubjAreaConn'),
+            getSphereInfluence:  $resource('/api/getSphereInfluence'),
+            getIncomingRelation:  $resource('/api/getIncomingRelation')
         };
     }
 ]);

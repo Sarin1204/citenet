@@ -1788,15 +1788,16 @@
           if (!a.conf.directedEdges) {
             return "M " + sourcePadding + " 0 L " + (distance - targetPadding) + " 0";
           } else {
-            headLength = a.conf.edgeWidth() * 2.4;
-            return "M " + sourcePadding + " 0 L " + (distance - targetPadding - headLength) + " 0 l 0 2 l " + (headLength / 2) + " -2 l " + (-headLength / 2) + " -2 L " + (distance - targetPadding - headLength) + " 0";
+              //Vipul fix for arrow width and height - change 12,-12,-12 points
+            headLength = a.conf.edgeWidth() * 6.4;
+              return "M " + sourcePadding + " 0 L " + (distance - targetPadding - headLength) + " 0 l 0 12 l " + (headLength / 2) + " -12 l " + (-headLength / 2) + " -12 L " + (distance - targetPadding - headLength) + " 0";
           }
         } else {
           padding = a.conf.edgeWidth() * 1.7;
-          arrowWidth = a.conf.edgeWidth() * 0.6;
+          arrowWidth = a.conf.edgeWidth() * 2.6;
           shaftRadius = arrowWidth / 2;
           headRadius = shaftRadius * 2.4;
-          headLength = a.conf.directedEdges ? headRadius * 2 : 0.0001;
+          headLength = a.conf.directedEdges ? headRadius * 10 : 0.0001;
           xDist = edge.source.x - edge.target.x;
           yDist = edge.source.y - edge.target.y;
           edgeLength = Math.sqrt(square(xDist) + square(yDist));
@@ -1992,7 +1993,7 @@
             var pos = caption.lastIndexOf('|');
              caption = caption.substring(0,pos) + caption.substring(pos+1);
              caption += "</p>";
-             $("#captions").html(caption);
+             $(conf.captionSelector).html(caption);
           if (conf.nodeCaptionsOnByDefault) {
             return "block";
           }

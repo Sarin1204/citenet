@@ -39,6 +39,10 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
+                        config.graphHeight = function(){
+                            return 450;
+                        }
+                        config.captionSelector = "#captions";
                         var myEl = angular.element("svg");
                         myEl.remove();
                         //alchemy.begin({"dataSource": response[0]["graph"]})

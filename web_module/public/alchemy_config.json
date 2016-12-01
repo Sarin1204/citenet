@@ -7,6 +7,7 @@
 "nodeTypes": {"type":["Paper","subject_area","author","affiliation"]},
 "edgeTypes": {"caption":["CITES","associated_to","affiliated_to","written_by"]},
 "directedEdges":true,
+  "edgeArrowSize" : 30,
 "linkDistancefn": 800,
 "nodeStyle": {
 "Paper": {
@@ -37,23 +38,27 @@
 "edgeStyle": {
 "CITES": {
 "color": "#990921",
-"width":3,
+"width":2,
+  "opacity":0.8,
 "borderWidth": 10
 },
 "associated_to": {
 "color": "#2e377c",
-"width":2
+"width":2,
+  "opacity":0.7
 },
 "affiliated_to": {
 "color": "#2a6815",
-"width":2
+"width":2,
+  "opacity":0.7
 },
 "written_by":{
 "color": "rgb(0,255,0)",
-"width":2
+"width":1,
+  "opacity":0.7
 }
 },
-"initialScale": 0.5,
+"initialScale": 0.4,
 "initialTranslate": [250,150],
 "zoomControls":true
 }
