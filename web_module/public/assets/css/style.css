@@ -24,6 +24,10 @@ li.typeahead{
 .tooltipClass{
 	max-width:500px!important;
 }
+.firstTooltipClass{
+	width:400px;
+	max-width:400px!important;
+}
 h3.nomargin{
 	margin-top:0px;
 	margin-bottom:0px;

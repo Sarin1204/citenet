@@ -23,6 +23,7 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                         return 300;
                     }
                     config.captionSelector = "#shortestPathCaption";
+                    config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})
                     alchemy = new Alchemy(config);
                 })
@@ -50,7 +51,8 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     config.graphHeight = function(){
                         return 300;
                     }
-                    config.captionSelector = "#entityConnectionCaption";
+                     config.captionSelector = "#entityConnectionCaption";
+                     config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})
                     alchemy = new Alchemy(config);
                 })
@@ -76,6 +78,7 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                         return 300;
                     }
                     config.captionSelector = "#sphereInfluenceCaption";
+                    config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})
                     alchemy = new Alchemy(config);
                 })
@@ -102,6 +105,7 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                         return 300;
                     }
                     config.captionSelector = "#incomingRelationCaption";
+                     config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})
                     alchemy = new Alchemy(config);
                 })
@@ -111,6 +115,14 @@ angular.module('dashboard').controller('DashboardController',['$scope',
 
         $scope.IntroOptions = {
             steps:[
+                {
+                  tooltipClass: 'firstTooltipClass',
+                    intro: "<p class='text-center'><strong style='padding-right:5px'>Welcome to Citenet</strong> " +
+                    "</p>  <ul class='list-group' style='margin-bottom:0px'><li class='list-group-item'>Citenet is a network of research papers built on Neo4J graph database</li>"+
+                    "<li class='list-group-item'> It helps unearth connections between research entities for enhanced collaboration</li>" +
+                    "<li class='list-group-item'>Let's take a small tour of the 4 main use cases of Citenet</li></ul>",
+                    position: 'auto'
+                },
                 {
                     element: '#shortestPathPanel',
                     tooltipClass: 'tooltipClass',
