@@ -73,7 +73,7 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     config.dataSource = response[0]["graph"];
                     config.divSelector = "#sphere_influence";
                     config.graphHeight = function(){
-                        return 250;
+                        return 300;
                     }
                     config.captionSelector = "#sphereInfluenceCaption";
                     //alchemy.begin({"dataSource": response[0]["graph"]})
