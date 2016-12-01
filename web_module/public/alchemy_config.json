@@ -1,6 +1,6 @@
 {
 "nodeCaption": "caption",
-"forceLocked":false,
+"forceLocked":true,
 "edgeCaption": "caption",
 "nodeCaptionsOnByDefault": true,
 "edgeCaptionsOnByDefault": true,
@@ -37,20 +37,20 @@
 "edgeStyle": {
 "CITES": {
 "color": "#990921",
-"width":2,
+"width":3,
 "borderWidth": 10
 },
 "associated_to": {
 "color": "#2e377c",
-"width":1
+"width":2
 },
 "affiliated_to": {
 "color": "#2a6815",
-"width":1
+"width":2
 },
 "written_by":{
 "color": "rgb(0,255,0)",
-"width":1
+"width":2
 }
 },
 "initialScale": 0.5,

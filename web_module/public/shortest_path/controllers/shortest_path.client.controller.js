@@ -6,7 +6,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
     function($scope, $routeParams, $location, ShortestPath,getUser,alertify,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
-        $scope.intermediate_nodes = true;
+        $scope.intermediate_nodes = false;
         $scope.shortest_path_query = function(){
             console.log('Inside shortest_path_query');
             var fields = {

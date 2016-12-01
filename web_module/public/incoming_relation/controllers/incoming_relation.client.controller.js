@@ -6,7 +6,7 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
     function($scope, $routeParams, $location, IncomingRelation,getUser,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
-        $scope.intermediate_nodes = true;
+        $scope.intermediate_nodes = false;
         $scope.myFieldLabel="Select a source entity to see all it's incoming relations";
         $scope.entityType = "Paper";
         $scope.newValue = function() {

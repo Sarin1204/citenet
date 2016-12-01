@@ -6,7 +6,7 @@ angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope'
     function($scope, $routeParams, $location, SubjectAreaConn,getUser,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
-        $scope.intermediate_nodes = true;
+        $scope.intermediate_nodes = false;
         $scope.entityType='SubjectArea';
         $scope.child = {}
         $scope.subject_area_connection_query = function(){

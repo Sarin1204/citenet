@@ -6,7 +6,7 @@ angular.module('sphere_influence').controller('SphereInfluence',['$scope',
     function($scope, $routeParams, $location, SphereInfluence,getUser,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
-        $scope.intermediate_nodes = true;
+        $scope.intermediate_nodes = false;
         $scope.sphere_influence_query = function(){
             console.log('Inside subject_area_connection_query');
             var fields = {

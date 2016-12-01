@@ -130,18 +130,24 @@
                             <div class="panel-body">
                                 <div class="container-fluid" ng-controller="IncomingRelation">
                                     <form role="form" data-ng-submit="incoming_relation_query()" class="registration-form">
-                                        <div>
-                                            <label>Please select the type of entity</label><br>
-                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Paper" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
-                                            <label> Paper </label>
-                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="SubjectArea" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
-                                            <label> Subject Area </label>
-                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Author" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
-                                            <label>  Author    </label>
-                                            <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Affiliation" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
-                                            <label> Affiliation </label>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label>Please select the type of entity</label><br>
+                                                <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Paper" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
+                                                <label> Paper </label>
+                                                <input bs-switch ng-model="entityType"  switch-change="newValue()" value="SubjectArea" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
+                                                <label> Subject Area </label>
+                                                <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Author" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
+                                                <label>  Author    </label>
+                                                <input bs-switch ng-model="entityType"  switch-change="newValue()" value="Affiliation" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="radio">
+                                                <label> Affiliation </label>
+                                            </div>
+                                            <div class="col-md-1 col-md-offset-3" style="padding-top:15px">
+                                                <button style="padding:10px 15px" class="btn btn-success btn-lg" type="submit">
+                                                    <i class="fa fa-play"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <br>
                                         <div class="row">
                                             <div class="col-md-5 ">
                                                 <div class="form-group">
@@ -151,13 +157,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 col-md-offset-1" style="padding-top:15px">
-                                                <button style="padding:10px 15px" class="btn btn-success btn-lg" type="submit">
-                                                    <i class="fa fa-play"></i>
-                                                </button>
-                                            </div>
                                         </div>
-                                        <hr>
                                         <div class="row">
                                             <div class="col-md-1">
                                                 <input bs-switch ng-model="intermediate_nodes" switch-on-text="YES" switch-on-color="success" switch-off-text="NO" switch-off-color="danger" switch-size="mini" type="checkbox">

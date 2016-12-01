@@ -132,11 +132,10 @@ svg {
 
 .node text {
   display: none;
-  fill: white;
+  fill: black;
   font-weight: 200;
   text-anchor: middle;
   z-index: 1000;
-  text-shadow: 1px 1px #333, -1px 1px #333, 1px -1px #333, -1px -1px #333;
 }
 
 .node.active {
@@ -172,11 +171,10 @@ defs #arrow path {
 }
 
 .edge.active text {
-  display: none;
-  fill: white;
+  display: block;
+  fill: black;
   font-weight: 200;
   text-anchor: middle;
-  text-shadow: 1px 1px #333, -1px 1px #333, 1px -1px #333, -1px -1px #333;
   z-index: 1000;
 }
 
