@@ -142,6 +142,12 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     "</button></p>  <ul class='list-group' style='margin-bottom:0px'><li class='list-group-item'>Shows which entities an entity was influenced by</li>"+
                     "<li class='list-group-item'> Example - Find papers that cited my paper</li></ul>",
                     position: 'auto'
+                },
+                {
+                    element: '#usecases',
+                    tooltipClass: 'tooltipClass',
+                    intro: "<p class='text-center'><strong> Get Started </strong> <ul class='list-group' style='margin-bottom:0px'><li class='list-group-item'> Click on one of the use cases to get started!</li></ul>",
+                    position: 'auto'
                 }
             ]
         }
