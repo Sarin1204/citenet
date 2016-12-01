@@ -2,8 +2,8 @@
  * Created by vipul on 4/26/2016.
  */
 angular.module('signupPerson').controller('SignupPersonController',['$scope',
-    '$routeParams', '$location','SignupPerson',
-    function($scope, $routeParams, $location, SignupPerson){
+    '$routeParams', '$location','SignupPerson','alertify',
+    function($scope, $routeParams, $location, SignupPerson,alertify){
 
         $scope.$on('role', function (event, data){
             $scope.role_selected = data; // 'Some data'
@@ -23,7 +23,13 @@ angular.module('signupPerson').controller('SignupPersonController',['$scope',
             signup.$save(function(response){
                 console.log("Inside signup save "+response);
                 /*$window.location.href='http://localhost:3000/api/checkchild';*/
-                $location.path('/dashboard')
+                if (response.approved == 0)
+                {
+                    alertify.logPosition("top right");
+                    alertify.success("Signup successful. Please wait for admin approval.");
+                }
+                else
+                    $location.path('/dashboard');
             }, function(errorResponse){
                 console.log('error'+JSON.stringify(errorResponse));
             });

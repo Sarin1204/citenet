@@ -42,7 +42,7 @@ exports.signup = function(req, res, next) {
                         console.log("signup person successful"+JSON.stringify(success));
                         req.login({"email" : email}, function(err){
                             if (err) return next(err);
-                            return res.redirect('/');
+                            return res.json({"approved":approved});
                         });
                         return res.json(success[0]);
                         });
