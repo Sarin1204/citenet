@@ -2,8 +2,8 @@
  * Created by vipul on 4/27/2016.
  */
 angular.module('incoming_relation').controller('IncomingRelation',['$scope',
-    '$routeParams', '$location','IncomingRelation','getUser','$http',
-    function($scope, $routeParams, $location, IncomingRelation,getUser,$http){
+    '$routeParams', '$location','IncomingRelation','getUser','alertify','$http',
+    function($scope, $routeParams, $location, IncomingRelation,getUser,alertify,$http){
         console.log("getUser"+JSON.stringify(getUser.user));
         $scope.all_paths = false;
         $scope.intermediate_nodes = false;
@@ -41,11 +41,12 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
-                        if(response[0]["graph"]["nodes"].length==0){
-                            $scope.query_empty = {type: 'alert alert-danger',msg: "This query returned no result. Please try other values"};
-                            $scope.showMessage = true;
+                        if(response[0]["graph"]["nodes"].length!=0){
+                            alertify.logPosition("top right");
+                            alertify.success("Success! Check out your graph!");
                         }else{
-                            $scope.showMessage=false;
+                            alertify.logPosition("bottom right");
+                            alertify.error("This query did not return any results. Please try other parameters");
                         }
                         config.graphHeight = function(){
                             return 450;

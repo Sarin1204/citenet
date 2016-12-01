@@ -27,11 +27,12 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                     .then(function(res){
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
-                        if(response[0]["graph"]["nodes"].length==0){
-                            $scope.query_empty = {type: 'alert alert-danger',msg: "This query returned no result. Please try other values"};
-                            $scope.showMessage = true;
+                        if(response[0]["graph"]["nodes"].length!=0){
+                            alertify.logPosition("top right");
+                            alertify.success("Success! Check out your graph!");
                         }else{
-                            $scope.showMessage=false;
+                            alertify.logPosition("bottom right");
+                            alertify.error("This query did not return any results. Please try other parameters");
                         }
                         config.graphHeight = function(){
                             return 450;
@@ -41,10 +42,7 @@ angular.module('shortest_path').controller('ShortestPathController',['$scope',
                         myEl.remove();
                         //alchemy.begin({"dataSource": response[0]["graph"]})
                         alchemy = new Alchemy(config);
-                        if(response[0]["graph"]["nodes"].length!=0){
-                        alertify.logPosition("top right");
-                        alertify.success("Success! Check out your graph!");
-                        }
+
                     })
             },function(error){
                 console.log('Error in getShortestPath '+error);
