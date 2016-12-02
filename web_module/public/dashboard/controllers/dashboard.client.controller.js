@@ -24,6 +24,12 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     }
                     config.captionSelector = "#shortestPathCaption";
                     config.initialScale = 0.3;
+                    config.linkDistancefn = function(edge){
+                        if(edge.caption == "CITES")
+                            return 800;
+                        else
+                            return 150;
+                    }
                     //alchemy.begin({"dataSource": response[0]["graph"]})
                     alchemy = new Alchemy(config);
                 })
@@ -51,6 +57,12 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     config.graphHeight = function(){
                         return 300;
                     }
+                     config.linkDistancefn = function(edge){
+                         if(edge.caption == "CITES")
+                             return 800;
+                         else
+                             return 150;
+                     }
                      config.captionSelector = "#entityConnectionCaption";
                      config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})
@@ -76,6 +88,12 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     config.divSelector = "#sphere_influence";
                     config.graphHeight = function(){
                         return 300;
+                    }
+                    config.linkDistancefn = function(edge){
+                        if(edge.caption == "CITES")
+                            return 800;
+                        else
+                            return 150;
                     }
                     config.captionSelector = "#sphereInfluenceCaption";
                     config.initialScale = 0.3;
@@ -104,6 +122,12 @@ angular.module('dashboard').controller('DashboardController',['$scope',
                     config.graphHeight = function(){
                         return 300;
                     }
+                     config.linkDistancefn = function(edge){
+                         if(edge.caption == "CITES")
+                             return 800;
+                         else
+                             return 150;
+                     }
                     config.captionSelector = "#incomingRelationCaption";
                      config.initialScale = 0.3;
                     //alchemy.begin({"dataSource": response[0]["graph"]})

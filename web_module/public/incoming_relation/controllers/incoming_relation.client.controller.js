@@ -51,6 +51,12 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
                         config.graphHeight = function(){
                             return 450;
                         }
+                        config.linkDistancefn = function(edge){
+                            if(edge.caption == "CITES")
+                                return 800;
+                            else
+                                return 150;
+                        }
                         config.captionSelector = "#captions";
                         var myEl = angular.element("svg");
                         myEl.remove();
