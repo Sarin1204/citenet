@@ -93,10 +93,10 @@ exports.getShortestPath = function(req, res){
         qTest="MATCH p=(a:Paper{scopus_id:'"+startPaper+"'})-[c*0..3]-(b:Paper{scopus_id:'"+endPaper+"'}) UNWIND NODES(p) as PNODE RETURN PNODE,c";
     }
     if(intermediate_nodes.toString()=="true"){
-     qTest="MATCH p=shortestPath((a:Paper{scopus_id:'"+startPaper+"'})-[c:CITES*]-(b:Paper{scopus_id:'"+endPaper+"'})) UNWIND NODES(p) as PNODE WITH PNODE,c MATCH (PNODE)-[in]-(d) RETURN PNODE,c,in,d"
+     qTest="MATCH p=shortestPath((a:Paper{scopus_id:'"+startPaper+"'})-[c:CITES*]-(b:Paper{scopus_id:'"+endPaper+"'})) UNWIND NODES(p) as PNODE WITH PNODE,c MATCH (PNODE)-[in:associated_to|:written_by|:affiliated_to]-(d) RETURN PNODE,c,in,d"
         if(allPath.toString()=="true"){
             qTest="MATCH p=(a:Paper{scopus_id:'"+startPaper+"'})-[c*0..3]-(b:Paper{scopus_id:'"+endPaper+"'}) UNWIND NODES(p) as PNODE WITH PNODE,c" +
-                " MATCH (PNODE:Paper)-[in]-(end) RETURN PNODE,c,in,end";
+                " MATCH (PNODE:Paper)-[in:associated_to|:written_by|:affiliated_to]-(end) RETURN PNODE,c,in,end";
         }
     }
 

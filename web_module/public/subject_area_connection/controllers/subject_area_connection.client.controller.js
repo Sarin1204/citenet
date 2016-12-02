@@ -31,8 +31,8 @@ angular.module('subject_area_connection').controller('SubjectAreaConn',['$scope'
                         var config = res.data;
                         config.dataSource = response[0]["graph"];
                         if(response[0]["graph"]["nodes"].length!=0){
-                            alertify.logPosition("top right");
-                            alertify.success("Success! Check out your graph!");
+                            alertify.logPosition("bottom right");
+                            alertify.log("Graph is limited to 100 relations");
                         }else{
                             alertify.logPosition("bottom right");
                             alertify.error("This query did not return any results. Please try other parameters");
