@@ -1,0 +1,153 @@
+<nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="/img/citenet_asu_logo.png" style="height:66px">
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=" col-md-10 navbar-collapse" id="top-navbar-1" style="width:83.3%">
+                <ul class="nav navbar-nav" style="float:right">
+                    <li class="navbar-li">
+                        {{firstName}}
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/dashboard">Home</a>
+                    </li>
+                    <li ng-controller="RoleStatusController" ng-show="is_systemAdmin==true" class="navbar-li">
+                        <a href="#!/admin/">
+                            <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li ng-controller="RoleStatusController" ng-show="is_admin == true||is_systemAdmin==true" class="navbar-li">
+                        <a href="#!/uploadPapers/">
+                            <i class="fa fa-cloud-upload fa-2x"></i>
+                        </a>
+                    </li>
+                    <li style="padding-left:1em">
+                    <span class="li-social">
+                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1" style="padding-left:0px; width:10%; padding-right:0px">
+                    <div class="panel-card panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Get started
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/shortest_path"><button style="padding:13px 20px" type="button" class="btn btn-primary btn-lg">
+                                        <i class="fa fa-arrows-h fa-2x"></i>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/subject_area_connection"><button style="padding:13px 16px" type="button" class="btn btn-success btn-lg">
+                                        <i class="fa fa-handshake-o fa-2x"></i>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/sphere_influence">
+                                        <button style="padding:13px 25px" type="button" class="btn btn-info btn-lg">
+                                            <i class="fa fa-globe fa-2x"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel-card panel">
+                                <div class="panel-body" style="padding-left:10px">
+                                    <a href="#!/incoming_relation">
+                                        <button style="padding:13px 25px" type="button" class="btn btn-danger btn-lg">
+                                            <i class="fa fa-share-alt fa-2x"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="panel-card panel panel-default">
+                            <div class="panel-body" style="height:605px;overflow-y: scroll;">
+                                <div class="container-fluid" ng-controller="UserSettingsController">
+                                    <div class="col-sm-6">
+                                        <div class="form-top">
+                                            <div class="form-bottom" ng-controller="UserSettingsController" style="max-height:465px; overflow:auto">
+                                                <form role="form" data-ng-submit="reset_password()"  class="registration-form">
+                                                    <div class="form-group">
+                                                        <label for="newPassword" class="control-label">New Password</label>
+                                                        <div>
+                                                         <input type="password" id="newPassword" class="form-control" name="newPassword" ng-model="newPassword" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="newPasswordConfirm" class="control-label">Confirm Password</label>
+                                                        <div>
+                                                          <input type="password" class="form-control" ng-model="newPasswordConfirm" id="newPasswordConfirm" data-match="#newPassword" data-match-error="These passwords don't match"  required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-offset-5">
+                                                        <button class="btn btn-lg" type="submit" >Reset</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                       <div class="form-top">
+                                            <div class="form-bottom" ng-controller="UserSettingsController" style="max-height:465px; overflow:auto">
+                                                <form role="form" data-ng-submit="update_info()" class="registration-form">
+                                                    <div class="form-group">
+                                                        <label for="firstname">First Name</label>
+                                                        <div>
+                                                            <input type="text" ng-model="firstname" id="firstname" class="form-control" placeholder="firstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastname">Last Name</label>
+                                                        <div>
+                                                            <input type="text" ng-model="lastname" id="lastname" class="form-control" placeholder="lastName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-offset-5">
+                                                        <button class="btn btn-lg" type="submit" >Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
