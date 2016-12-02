@@ -55,6 +55,7 @@ module.exports = function () {
     require('../app/routes/upload_papers.server.route.js')(app);
     require('../app/routes/typeahead.server.route.js')(app);
     require('../app/routes/admin.server.route.js')(app);
+    require('../app/routes/usersettings.server.route.js')(app);
 
     app.use(express.static('./public'));
 
