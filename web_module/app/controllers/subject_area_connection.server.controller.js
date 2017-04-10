@@ -101,6 +101,7 @@ exports.getSubjAreaConn = function(req, res) {
         }
     }
 
+
     qTest=qTest+" LIMIT 100";
     var queryTest="{\"statements\" : [ { \"statement\" : \" "+ qTest +"\", \"resultDataContents\" : [ \"graph\" ] } ] }"
     console.log(qTest);

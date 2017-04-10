@@ -46,10 +46,10 @@
 </nav>
 <div class="top-content">
     <div class="inner-bg">
-        <div class="container-fluid" ng-controller="UploadPapersController as up" >
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
-                    <div class="panel-card panel panel-default">
+                    <div class="panel-card panel panel-default" ng-controller="UploadPapersController as up">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 Upload a file containing Scopus-ID's of research papers
@@ -88,6 +88,73 @@
                                     </div>
                                     <div class="col-md-offset-3">
                                         <div class="col-sm-4"><uib-progressbar class="progress-striped active" value=up.progress type="success">{{up.progress}}%</uib-progressbar></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="panel-card panel panel-default" ng-controller="UploadKeywordsController as key">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Upload upto 5 keywords to filter graphs based on your keywords
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <form name="key.upload_key_form" data-ng-submit="key.upload_keywords()" class="registration-form">
+                                        <div class="form-group" >
+                                            <label for="keyword1">Keyword1</label>
+                                            <div>
+                                                <input type="text" data-ng-model="key.keyword1" id="keyword1" class="form-control" placeholder="keyword1" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="keyword2">Keyword2</label>
+                                            <div>
+                                                <input type="text" data-ng-model="key.keyword2" id="keyword2" class="form-control" placeholder="keyword2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="keyword3">Keyword3</label>
+                                            <div>
+                                                <input type="text" data-ng-model="key.keyword3" id="keyword3" class="form-control" placeholder="keyword3" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="keyword1">Keyword4</label>
+                                            <div>
+                                                <input type="text" data-ng-model="key.keyword4" id="keyword4" class="form-control" placeholder="keyword4">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="keyword1">Keyword5</label>
+                                            <div>
+                                                <input type="text" data-ng-model="key.keyword5" id="keyword5" class="form-control" placeholder="keyword5">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-offset-5">
+                                            <button style="padding:7px 15px" type="submit" class="btn btn-success">
+                                                <i class="fa fa-cloud-upload"></i> Upload
+                                            </button>
+                                        </div>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div ng-show="key.showKeywordMessage" class="{{key.postKeywordUploadResult.type}} fadein fadeout" style="width:800px">{{key.postKeywordUploadResult.msg}}</div>
+                                </div>
+                                <div class="row" ng-show="key.is_keyword_uploaded == true">
+                                    <div class="col-md-3 col-md-offset-1">
+                                        Keyword Progress:
+                                    </div>
+                                    <div class="col-md-offset-3">
+                                        <div class="col-sm-6"><uib-progressbar class="progress-striped active" value=key.keyword_progress type="success">{{key.keyword_progress}}%</uib-progressbar></div>
                                     </div>
                                 </div>
                             </div>

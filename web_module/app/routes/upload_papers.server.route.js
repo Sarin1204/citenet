@@ -9,7 +9,7 @@ module.exports = function(app){
     app.route('/api/uploadPapers')
         .post(upload_papers.uploadPapers);
 
-    app.route('/api/getProgress/:user_email')
+    app.route('/api/getProgress/:id')
         .get(upload_papers.getProgress);
 
 };

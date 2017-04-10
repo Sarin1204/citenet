@@ -107,13 +107,21 @@ class PaperAbstract(object):
   def srctype(self,srctype):
     self._srctype=srctype
 
+  @property
+  def description(self):
+      return self._description
+
+  @description.setter
+  def description(self,description):
+      self._description=description
+
   def __init__(self,arg1):
     if isinstance(arg1, str):
       self._raw_abstract = ScopusAbstract("2-s2.0-"+arg1.replace("2-s2.0-","").strip())
     else:
       self._raw_abstract = arg1
 
-    self._node_properties = ["scopus_id","title","publisher","srctype"]
+    self._node_properties = ["scopus_id","title","publisher","srctype","description"]
     self._node_relationships = ["subject_areas","affiliations","authors"]
     '''self._scopus_id = self.raw_abstract.eid
       self._title = self.raw_abstract.title
@@ -151,9 +159,13 @@ class PaperAbstract(object):
   def create_remote_node(self,graph):
     find_query = 'MATCH(p:Paper{scopus_id:"'+self.scopus_id+'"}) RETURN p'
     find_ret = graph.run(find_query)
-    if find_ret.evaluate() == None:
+    find_ret_data = find_ret.data()
+    if len(find_ret_data) == 0:
       create_query = 'CREATE(p:Paper'+self.create_node_prop_string()+')'
       graph.run(create_query)
+    elif 'description' not in find_ret_data and self.description is not None:
+        update_query = 'MATCH(p:Paper{scopus_id:"'+self.scopus_id+'"}) SET p.description = "'+self.description+'" return p'
+        graph.run(update_query)
 
   def create_remote_relationships(self,graph):
     for rel_type in self.node_relationships:

@@ -209,7 +209,10 @@ class ScopusAbstract(object):
         self._pageRange = get_encoded_text(coredata, 'prism:pageRange')
         self._coverDate = get_encoded_text(coredata, 'prism:coverDate')
         self.creator = get_encoded_text(coredata, 'dc:creator')
-        self.description = get_encoded_text(coredata, 'dc:description')
+        try:
+            self.description = coredata.find('dc:description',ns).find('dtd:abstract',ns).find('ce:para',ns).text
+        except Exception,e:
+            self.description = None
 
         sl = coredata.find('dtd:link[@rel="scopus"]', ns).get('href', None)
         self_link = coredata.find('dtd:link[@rel="self"]',

@@ -18,7 +18,10 @@
     "passport-local": "latest",
     "sequelize": "latest",
     "multer": "latest",
-    "python-shell": "latest"
+    "python-shell": "latest",
+    "kue": "latest",
+    "zerorpc": "latest",
+    "kue-ui":"latest"
   },
   "main": "server.js",
   "devDependencies": {},

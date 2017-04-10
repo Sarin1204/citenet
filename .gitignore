@@ -136,3 +136,4 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 web_module/.idea/*
+*.o
