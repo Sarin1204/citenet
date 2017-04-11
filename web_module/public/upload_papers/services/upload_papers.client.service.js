@@ -7,7 +7,12 @@ angular.module('upload_papers').factory('UploadPapers',['$resource',
             GetProgress:  $resource('api/getProgress/:user_email',{
                 user_email:'@user_email'
             }),
-            UploadPapers:  $resource('api/uploadPapers')
+            UploadPapers:  $resource('api/uploadPapers'),
+
+            GetPhraseProgress:  $resource('api/getPhraseProgress/:user_email',{
+                user_email:'@user_email'
+            }),
+            UploadPhrase:  $resource('api/uploadPhrase'),
         };
     }
 ]);

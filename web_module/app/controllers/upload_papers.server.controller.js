@@ -2,6 +2,10 @@
  * Created by sarin on 11/12/16.
  */
 
+var kue = require('kue');
+var queue = kue.createQueue();
+var zerorpc = require("zerorpc");
+
 var multer = bcrypt = require('multer'),
     PythonShell = require('python-shell'),
     fs = require("fs"),
@@ -48,11 +52,37 @@ exports.uploadPapers = function(req, res) {
     })
 };
 
+exports.uploadPhrase = function(req,res){
+
+    console.log('inside upload_phrase controller' + JSON.stringify(req.body));
+
+    var job = queue.create('upload_phrase',req.body).save( function(err){
+        if(!err){
+            queue.process('upload_phrase', function(job, done){
+
+                function perform_phrase_upload(data, done){
+                    console.log("Inside perform_phrase_upload"+JSON.stringify(data));
+                    var client = new zerorpc.Client();
+                    client.connect("tcp://127.0.0.1:4242");
+                    client.invoke("insert_phrase",data.phrase,data.user.email, function(error, res, more) {
+                        console.log(res);
+                        job.progress(res,100);
+                        done()
+                    });
+                }
+
+                perform_phrase_upload(job.data,done)
+            });
+        }
+        return res.json({"id":job.id});
+    });
+};
+
 exports.getProgress = function(req,res){
     console.log("get progress req users"+req.params.user_email);
     fs.readFile(config.scopus_module+'/files_uploaded/'+req.params.user_email+"_output.txt", 'utf8', function(err, contents) {
         if(err){
-            console.log("file read error "+JSON.stringify(err))
+            console.log("file read error "+JSON.stringify(err));
             return res.status(500).send({error: "failed"})
         }
         else

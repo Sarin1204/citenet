@@ -12,4 +12,10 @@ module.exports = function(app){
     app.route('/api/getProgress/:id')
         .get(upload_papers.getProgress);
 
+    app.route('/api/uploadPhrase')
+        .post(upload_papers.uploadPhrase);
+
+    app.route('api/getPhraseProgress/:id')
+        .get(upload_papers.getProgress);
+
 };

@@ -60,7 +60,7 @@ class ScopusSearch(object):
                                          'X-ELS-APIKey': MY_API_KEY},
                                 params={'query': query,
                                         'field': fields,
-                                        'count': 0,
+                                        'count': 100,
                                         'start': 0})
             results = ET.fromstring(resp.text.encode('utf-8'))
             N = results.find('opensearch:totalResults', ns)

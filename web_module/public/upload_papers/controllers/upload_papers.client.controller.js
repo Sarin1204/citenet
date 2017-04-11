@@ -49,6 +49,32 @@ angular.module('upload_papers').controller('UploadPapersController',['Upload','$
         }
     }
 
+    vm.upload_phrase = function(){
+        console.log('Inside upload_phrase');
+        var phrase = new UploadPapers.UploadPhrase({
+            phrase: this.phrase,
+            user: getUser.user
+        });
+        console.log('phrase uploaded are'+JSON.stringify(phrase));
+
+        phrase.$save(function(response){
+            console.log("Inside phrase "+JSON.stringify(response));
+
+            vm.postPhraseUploadResult = {type:"alert alert-success", msg: "Phrase Uploaded"};
+            vm.showPhraseMessage = true;
+            vm.is_phrase_uploaded = true;
+            $timeout(function() {
+                vm.showPhraseMessage = false;
+            }, 3000);
+            vm.phrase_progress=0;
+            get_phrase_progress(vm);
+
+        }, function(errorResponse){
+            console.log('error'+JSON.stringify(errorResponse));
+        });
+    };
+
+
     function get_progress(vm){
         interval_promise = $interval(function(){
             console.log("get progress user email is "+getUser.user.email);
@@ -68,6 +94,32 @@ angular.module('upload_papers').controller('UploadPapersController',['Upload','$
                 vm.showMessage = true;
                 $timeout(function() {
                     vm.showMessage = false;
+                }, 3000);
+
+            })
+        }, 3000);
+
+    }
+
+    function get_phrase_progress(vm){
+        interval_promise = $interval(function(){
+            console.log("get phrase progress user email is "+getUser.user.email);
+            UploadPapers.GetPhraseProgress.get({"user_email":getUser.user.email},function(response){
+                console.log("get phrase progress response is "+JSON.stringify(response));
+                var status = JSON.parse(response.message);
+                var percent_completed = Math.round(status.completed/status.total*100)
+                vm.phrase_progress=percent_completed;
+                if(percent_completed == 100)
+                {
+                    $interval.cancel(interval_promise);
+                }
+            },function(error){
+                console.log("get phrase progress error is"+JSON.stringify(error));
+                $interval.cancel(interval_promise);
+                vm.postPhraseUploadResult =  {type:"alert alert-danger", msg: "Phrase upload failed..."};
+                vm.showPhraseMessage = true;
+                $timeout(function() {
+                    vm.showPhraseMessage = false;
                 }, 3000);
 
             })

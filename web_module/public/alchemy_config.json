@@ -4,8 +4,8 @@
 "edgeCaption": "caption",
 "nodeCaptionsOnByDefault": true,
 "edgeCaptionsOnByDefault": true,
-"nodeTypes": {"type":["Paper","subject_area","author","affiliation"]},
-"edgeTypes": {"caption":["CITES","associated_to","affiliated_to","written_by"]},
+"nodeTypes": {"type":["Paper","subject_area","author","affiliation","Keyword"]},
+"edgeTypes": {"caption":["CITES","associated_to","affiliated_to","written_by","contains"]},
 "directedEdges":true,
   "edgeArrowSize" : 30,
 "linkDistancefn": 800,
@@ -33,7 +33,13 @@
 "borderWidth": 6,
 "borderColor": "#904891",
 "radius"     : 44
-}
+},
+  "Keyword": {
+    "color":"#f49842",
+    "borderWidth": 6,
+    "borderColor": "#d17608",
+    "radius"     : 44
+  }
 },
 "edgeStyle": {
 "CITES": {
@@ -56,7 +62,12 @@
 "color": "rgb(0,255,0)",
 "width":1,
   "opacity":0.7
-}
+},
+  "contains":{
+    "color": "7464db",
+    "width":1,
+    "opacity":0.7
+  }
 },
 "initialScale": 0.4,
 "initialTranslate": [250,150],

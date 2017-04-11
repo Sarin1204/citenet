@@ -43,7 +43,6 @@ filename=filename.replace("\n","")
 
 authenticate(server+":"+port, "neo4j", "3800")
 graph = Graph()
-pdb.set_trace()
 with open(filename) as f:
     paper_ids = f.readlines()
 paper_ids = [x.strip('\n') for x in paper_ids]

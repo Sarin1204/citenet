@@ -9,6 +9,7 @@ import os
 import zerorpc
 import logging
 import time
+from scopus.scopus_search import ScopusSearch
 
 logging.basicConfig()
 
@@ -78,6 +79,15 @@ class StreamingRPC(object):
         keywords = [str(x) for x in keywords.values()]
         print "Inserting keywords "+str(keywords)
         return insert_keywords(keywords)
+
+    def insert_phrase(self,phrase,user):
+        pdb.set_trace()
+        print "Inside insert_phrase"+str(phrase) +str(user)
+        EIDS_obj = ScopusSearch('title-abs-key ( Data Link Layer )', refresh=True)
+        pdb.set_trace()
+        EIDS = EIDS_obj.EIDS
+        print os.system("./insert_papers.py files_uploaded\\" +user)
+
 
 s = zerorpc.Server(StreamingRPC())
 s.bind("tcp://0.0.0.0:4242")
