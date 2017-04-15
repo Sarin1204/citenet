@@ -9,13 +9,13 @@ module.exports = function(app){
     app.route('/api/uploadPapers')
         .post(upload_papers.uploadPapers);
 
-    app.route('/api/getProgress/:id')
+    app.route('/api/getProgress/:user_email')
         .get(upload_papers.getProgress);
 
     app.route('/api/uploadPhrase')
         .post(upload_papers.uploadPhrase);
 
-    app.route('api/getPhraseProgress/:id')
+    app.route('/api/getPhraseProgress/:user_email')
         .get(upload_papers.getProgress);
 
 };

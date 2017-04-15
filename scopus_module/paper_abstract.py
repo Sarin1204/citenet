@@ -113,11 +113,19 @@ class PaperAbstract(object):
 
   @description.setter
   def description(self,description):
-      self._description=description
+      if description != None:
+        self._description=description.replace('"','')
+      else:
+          self._description = None
 
   def __init__(self,arg1):
+    self.no_abstract = False
     if isinstance(arg1, str):
-      self._raw_abstract = ScopusAbstract("2-s2.0-"+arg1.replace("2-s2.0-","").strip())
+        try:
+            self._raw_abstract = ScopusAbstract("2-s2.0-"+arg1.replace("2-s2.0-","").strip())
+        except Exception,e:
+            self.no_abstract = True
+            return
     else:
       self._raw_abstract = arg1
 

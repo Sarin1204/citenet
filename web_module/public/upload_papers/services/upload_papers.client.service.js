@@ -12,7 +12,7 @@ angular.module('upload_papers').factory('UploadPapers',['$resource',
             GetPhraseProgress:  $resource('api/getPhraseProgress/:user_email',{
                 user_email:'@user_email'
             }),
-            UploadPhrase:  $resource('api/uploadPhrase'),
+            UploadPhrase:  $resource('api/uploadPhrase')
         };
     }
 ]);

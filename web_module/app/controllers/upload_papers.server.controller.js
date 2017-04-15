@@ -97,7 +97,7 @@ function start_graph_insert(user,file,res){
     var options = {
         scriptPath: config.scopus_module,
         args: config.scopus_module+'/files_uploaded/'+user.email,
-        mode: 'json'
+        mode: 'text'
     };
     var pyshell= new PythonShell('insert_papers.py',options);
     PythonShell.run('insert_papers.py',options,function(err,results){
@@ -105,6 +105,10 @@ function start_graph_insert(user,file,res){
             console.log("error in run "+JSON.stringify(err))
         }
         console.log("results are "+JSON.stringify(results))
+    });
+    pyshell.on('message', function (message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log("pyshell message" + message);
     });
     pyshell.end(function(){
         console.log("inside pyshell end");

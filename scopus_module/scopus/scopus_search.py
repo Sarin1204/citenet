@@ -29,7 +29,7 @@ class ScopusSearch(object):
                  count=200,
                  start=0,
                  refresh=False,
-                 max_entries=1000):
+                 max_entries=10000000):
         """A Scopus Search query.
 
         query is a string of the query.
@@ -60,27 +60,27 @@ class ScopusSearch(object):
                                          'X-ELS-APIKey': MY_API_KEY},
                                 params={'query': query,
                                         'field': fields,
-                                        'count': 100,
+                                        'count': count,
                                         'start': 0})
             results = ET.fromstring(resp.text.encode('utf-8'))
-            N = results.find('opensearch:totalResults', ns)
+            '''N = results.find('opensearch:totalResults', ns)
             try:
                 N = int(N.text)
             except:
                 N = 0
-                
             if N > max_entries:
                 raise Exception(('N = {}. '
                                  'Set max_entries to a higher number or '
-                                 'change your query').format(N))
+                                 'change your query').format(N))'''
 
             self._EIDS = []
+            N=count
             while N > 0:
                 resp = requests.get(url,
                                     headers={'Accept': 'application/json',
                                              'X-ELS-APIKey': MY_API_KEY},
                                     params={'query': query,
-                                            'fields': fields,
+                                            'field': fields,
                                             'count': count,
                                             'start': start})
 

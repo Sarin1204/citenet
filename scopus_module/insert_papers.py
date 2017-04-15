@@ -6,6 +6,10 @@ import argparse
 import json
 import os
 
+import sys
+reload (sys)
+sys.setdefaultencoding('UTF-8')
+
 def init_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("filename",help="Name of file with papers to be inserted")
@@ -29,10 +33,10 @@ def perform_dfs(curr_paper,count):
             dfs(ref_id,curr_paper.scopus_id,count+1)
 
 def dfs(curr_paper_id,parent_id,count):
-    if count > 2:
+    if count > 0:
       return
     curr_paper = PaperAbstract(curr_paper_id)
-    if curr_paper.title != None:
+    if curr_paper.no_abstract == False and curr_paper.title != None:
       curr_paper.bind_remote(graph)
       connect_parent_node(curr_paper,parent_id)
       perform_dfs(curr_paper,count)
@@ -55,7 +59,10 @@ with open(output_file+'_output.txt','w+') as f:
     f.write(json.dumps(data))
 try:
     for paper_id in paper_ids:
-        dfs(paper_id,None,0)
+        try:
+            dfs(paper_id,None,0)
+        except Exception,e:
+            pass
         completed+=1
         data['completed']=completed
         data['curr_paper']=paper_id

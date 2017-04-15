@@ -14,7 +14,7 @@ from scopus.scopus_search import ScopusSearch
 logging.basicConfig()
 
 def extract_text(paper):
-    description = dict(paper)['p.description']
+    description = dict(paper)['p.description'].replace('"','')
     title = dict(paper)['p.title']
     text=""
     if description != None:
@@ -81,12 +81,14 @@ class StreamingRPC(object):
         return insert_keywords(keywords)
 
     def insert_phrase(self,phrase,user):
-        pdb.set_trace()
         print "Inside insert_phrase"+str(phrase) +str(user)
-        EIDS_obj = ScopusSearch('title-abs-key ( Data Link Layer )', refresh=True)
-        pdb.set_trace()
+        EIDS_obj = ScopusSearch('title-abs-key ( Data Link Layer )', refresh=True,count=5)
         EIDS = EIDS_obj.EIDS
-        print os.system("./insert_papers.py files_uploaded\\" +user)
+        #EIDS=["123","345"]
+        with open('files_uploaded/'+user,'w+') as f:
+            for EID in EIDS:
+                f.write(str(EID)+'\n')
+        os.system("python insert_papers.py files_uploaded/" +user)
 
 
 s = zerorpc.Server(StreamingRPC())

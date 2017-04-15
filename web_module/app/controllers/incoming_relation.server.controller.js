@@ -76,27 +76,34 @@ exports.getIncomingRelation = function(req, res){
         if(intermediate_nodes.toString()=="true"){
         qTest="MATCH path=(n:Paper)-[c:written_by]->(e:author{name:'"+endEntity+"'}) " +
             " UNWIND NODES(path) as pnode WITH pnode,c" +
-            " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+            " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to|:contains]-(nodes) RETURN pnode,c,in,nodes"
         }
     }else if(entityType.toString()=="Affiliation"){
         qTest="MATCH path=(n:Paper)-[c:affiliated_to]->(e:affiliation{affilname:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
         if(intermediate_nodes.toString()=="true"){
             qTest="MATCH path=(n:Paper)-[c:affiliated_to]->(e:affiliation{affilname:'"+endEntity+"'}) " +
                 " UNWIND NODES(path) as pnode WITH pnode,c" +
-                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to|:contains]-(nodes) RETURN pnode,c,in,nodes"
+        }
+    }else if(entityType.toString()=="Keywords"){
+        qTest="MATCH path=(n:Paper)-[c:contains]->(e:Keyword{value:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
+        if(intermediate_nodes.toString()=="true"){
+            qTest="MATCH path=(n:Paper)-[c:contains]->(e:Keyword{value:'"+endEntity+"'}) " +
+                " UNWIND NODES(path) as pnode WITH pnode,c" +
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to|:contains]-(nodes) RETURN pnode,c,in,nodes"
         }
     }else if(entityType.toString()=="SubjectArea"){
         qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{text:'"+endEntity+"'}) UNWIND NODES(path) as pnode RETURN pnode,c"
         if(intermediate_nodes.toString()=="true"){
             qTest="MATCH path=(n:Paper)-[c:associated_to]->(e:subject_area{text:'"+endEntity+"'}) " +
                 " UNWIND NODES(path) as pnode WITH pnode,c" +
-                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to|:contains]-(nodes) RETURN pnode,c,in,nodes"
         }
     }else{
         if(intermediate_nodes.toString()=="true"){
             qTest="MATCH path=(n:Paper)-[c:CITES]->(e:Paper{scopus_id:'"+endEntity+"'}) " +
                 " UNWIND NODES(path) as pnode WITH pnode,c" +
-                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to]-(nodes) RETURN pnode,c,in,nodes"
+                " MATCH (pnode:Paper)-[in:associated_to|:written_by|:affiliated_to|:contains]-(nodes) RETURN pnode,c,in,nodes"
         }
     }
 

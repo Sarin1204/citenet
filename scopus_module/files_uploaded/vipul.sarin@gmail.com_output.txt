@@ -1,1 +1,1 @@
-{"completed": 0, "total": 1}
+{"curr_paper": "2-s2.0-85013130644", "completed": 5, "total": 5}

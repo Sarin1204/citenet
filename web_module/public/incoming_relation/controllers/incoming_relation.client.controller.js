@@ -32,7 +32,7 @@ angular.module('incoming_relation').controller('IncomingRelation',['$scope',
                 'intermediate_nodes' : $scope.intermediate_nodes
             };
 
-            console.log("fileds are "+JSON.stringify(fields));
+            console.log("fields are "+JSON.stringify(fields));
 
             IncomingRelation.getIncomingRelation.query(fields, function(response){
                 console.log('Success in getIncomingRelation '+JSON.stringify(response));
